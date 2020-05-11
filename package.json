@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "controlkit": "^0.1.9",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "three": "^0.116.1",

@@ -11,6 +11,103 @@ body {
 .title {
     position: absolute;
     top: 0;
-    width: 50%;
+}
+.overlay {
+    position: absolute;
     text-align: center;
 }
+.overlay p {
+    margin-bottom: 0.25rem;
+}
+#rotate {
+    bottom: 15%;
+    right: 1%;
+    width: 22.5%;
+    color: white;
+    -webkit-touch-callout: none;
+}
+#rotate button {
+    width: 45%;
+    padding: 0.2rem 0.4rem;
+}
+#buttonLarge {
+    width: 100%;
+}
+#buttonLarge button {
+    width: 95%;
+}
+#rotate img {
+    width: 100%;
+}
+.copyright {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    width: 100%;
+    -webkit-touch-callout: none;
+}
+#info {
+    bottom: 1%;
+    right: 1%;
+    width: 10%;
+    -webkit-touch-callout: none;
+}
+#info img {
+    width: 100%;
+}
+.infoTitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color:  rgb(100, 100, 100);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0 20px 20px 0;
+    padding: 5px 0;
+    width: 50%;
+}
+.infoContent {
+    position: absolute;
+    top: 0%;
+    left: 45%;
+    background-color:  rgba(130, 130, 255, 0.75);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0 20px 20px 0;
+    padding: 5px 0;
+    width: 35%;
+}
+#sideMenuIcon {
+    top: 5%;
+    left: 2.5%;
+}
+.sideNav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sideNav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sideNav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+  
