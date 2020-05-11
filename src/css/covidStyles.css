@@ -1,0 +1,16 @@
+/* Viz framework styles */
+body {
+    margin: 0;
+    overflow: hidden;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#WebGL-Output {
+    transition: margin-left .5s;
+}
+.title {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    text-align: center;
+}

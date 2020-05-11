@@ -1,0 +1,29 @@
+{
+  "name": "covid",
+  "version": "1.0.0",
+  "description": "Visualisation of Covid-19 pandemic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctorTone/Covid.git"
+  },
+  "author": "Dr Tony Glover",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoctorTone/Covid/issues"
+  },
+  "homepage": "https://github.com/DoctorTone/Covid#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "three": "^0.116.1",
+    "three-trackballcontrols": "0.0.8"
+  }
+}
