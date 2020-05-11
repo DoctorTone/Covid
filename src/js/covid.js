@@ -14,6 +14,7 @@ import bootstrap from "bootstrap";
 
 import covidData from "../../data/cases.json";
 
+const CASES = 2;
 
 class Covid extends BaseApp {
     constructor() {
@@ -62,14 +63,6 @@ class Covid extends BaseApp {
         this.root.add(ground);
     }
 
-    createBarMaterials() {
-        let barMaterial;
-        for(let row=0; row<APPCONFIG.NUM_ROWS; ++row) {
-            barMaterial = new THREE.MeshLambertMaterial( {color: APPCONFIG.BAR_COLOURS[row], flatShading: true} );
-            this.barMaterials.push(barMaterial);
-        }
-    }
-
     createGUI() {
 
     }
@@ -88,12 +81,21 @@ class Covid extends BaseApp {
         // Add ground
         this.addGroundPlane();
 
-        //this.adjustCameraPosition();
-        
-        //this.createGUI();
+        const barMaterial = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR } );
+        const barGeom = new THREE.CylinderBufferGeometry(APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_HEIGHT);
 
-        // Show numerical sleep data
-        //this.showSleepData();
+        // Create bars
+        const numBars = covidData.length;
+        const bars = [];
+        let currentBarMesh;
+        let currentBarData;
+        for (let i=0; i<numBars; ++i) {
+            currentBarData = covidData[i];
+            currentBarMesh = new THREE.Mesh(barGeom, barMaterial);
+            currentBarMesh.scale.y = currentBarData[CASES];
+            bars.push(currentBarMesh);
+            this.root.add(currentBarMesh);
+        }
     }
 
     createBars() {
