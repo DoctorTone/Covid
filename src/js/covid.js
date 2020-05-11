@@ -14,6 +14,7 @@ import bootstrap from "bootstrap";
 import covidData from "../../data/cases.json";
 
 const CASES = 2;
+const DEATHS = 3;
 
 class Covid extends BaseApp {
     constructor() {
@@ -68,19 +69,29 @@ class Covid extends BaseApp {
 
     preProcessData() {
         // Get individual daily totals
-        const dailyCases = [];
         const totalDays = covidData.length;
         let currentDayData = covidData[0];
-        let previousDayData = currentDayData[CASES];
-        dailyCases.push(currentDayData[CASES]);
+
+        // Cases
+        const dailyCases = [];
+        let previousDailyCases = currentDayData[CASES];
+        dailyCases.push(previousDailyCases);
+
+        // Deaths
+        const dailyDeaths = [];
+        let previousDailyDeaths = currentDayData[DEATHS];
+        dailyDeaths.push(previousDailyDeaths);
 
         for (let i=1; i<totalDays; ++i) {
             currentDayData = covidData[i];
-            dailyCases.push(currentDayData[CASES] - previousDayData);
-            previousDayData = currentDayData[CASES];
+            dailyCases.push(currentDayData[CASES] - previousDailyCases);
+            previousDailyCases = currentDayData[CASES];
+            dailyDeaths.push(currentDayData[DEATHS] - previousDailyDeaths);
+            previousDailyDeaths = currentDayData[DEATHS];
         }
 
         this.dailyCases = dailyCases;
+        this.dailyDeaths = dailyDeaths;
     }
 
     createScene() {
@@ -100,7 +111,7 @@ class Covid extends BaseApp {
         // Add ground
         this.addGroundPlane();
 
-        const barMaterial = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR } );
+        const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES } );
         const barGeom = new THREE.CylinderBufferGeometry(APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_HEIGHT);
 
         // Create bars
@@ -110,7 +121,7 @@ class Covid extends BaseApp {
         let currentBarData;
         for (let i=0; i<numBars; ++i) {
             currentBarData = this.dailyCases[i];
-            currentBarMesh = new THREE.Mesh(barGeom, barMaterial);
+            currentBarMesh = new THREE.Mesh(barGeom, barMaterialCases);
             currentBarMesh.scale.y = this.dailyCases[i] === 0 ? 0.01 : this.dailyCases[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE;
             currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
