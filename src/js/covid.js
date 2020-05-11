@@ -159,7 +159,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y = this.dailyTests[i] === 0 ? 0.01 : this.dailyTests[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
-            APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * 2));
+                APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * 2));
             barsTests.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }

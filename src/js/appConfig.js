@@ -5,7 +5,7 @@ const APPCONFIG = {
     BAR_COLOUR_CASES : 0x0000ff,
     BAR_COLOUR_DEATHS: 0xff0000,
     BAR_COLOUR_TESTS: 0xff00ff,
-    BAR_RADIUS: 0.75,
+    BAR_RADIUS: 1.75,
     BAR_HEIGHT: 5,
     BAR_WIDTH: 0.75,
     BAR_DEPTH: 0.75,
@@ -24,7 +24,7 @@ const APPCONFIG = {
     GROUND_SEGMENTS: 128,
     GROUND_MATERIAL: 0xdddddd,
     TEX_REPEAT: 20,
-    BAR_INC_X: 2.5,
+    BAR_INC_X: 3.5,
     BAR_INC_Z: 5,
     BAR_COLOURS: [
         0xaa0000,
