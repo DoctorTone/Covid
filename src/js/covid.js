@@ -9,7 +9,6 @@ import { APPCONFIG } from "./appConfig";
 import { SceneConfig } from "./sceneConfig";
 import { LabelManager } from "./LabelManager";
 import controlkit from "controlkit";
-import { MonthlyConfig } from "./appConfig";
 import bootstrap from "bootstrap";
 
 import covidData from "../../data/cases.json";
@@ -67,7 +66,27 @@ class Covid extends BaseApp {
 
     }
 
+    preProcessData() {
+        // Get individual daily totals
+        const dailyCases = [];
+        const totalDays = covidData.length;
+        let currentDayData = covidData[0];
+        let previousDayData = currentDayData[CASES];
+        dailyCases.push(currentDayData[CASES]);
+
+        for (let i=1; i<totalDays; ++i) {
+            currentDayData = covidData[i];
+            dailyCases.push(currentDayData[CASES] - previousDayData);
+            previousDayData = currentDayData[CASES];
+        }
+
+        this.dailyCases = dailyCases;
+    }
+
     createScene() {
+        // Pre-process data
+        this.preProcessData();
+
         // Init base createsScene
         super.createScene();
 
@@ -85,14 +104,15 @@ class Covid extends BaseApp {
         const barGeom = new THREE.CylinderBufferGeometry(APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_HEIGHT);
 
         // Create bars
-        const numBars = covidData.length;
+        const numBars = this.dailyCases.length;
         const bars = [];
         let currentBarMesh;
         let currentBarData;
         for (let i=0; i<numBars; ++i) {
-            currentBarData = covidData[i];
+            currentBarData = this.dailyCases[i];
             currentBarMesh = new THREE.Mesh(barGeom, barMaterial);
-            currentBarMesh.scale.y = currentBarData[CASES];
+            currentBarMesh.scale.y = this.dailyCases[i] === 0 ? 0.01 : this.dailyCases[i];
+            currentBarMesh.position.x += (APPCONFIG.BAR_INC_X * i);
             bars.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }
@@ -100,19 +120,6 @@ class Covid extends BaseApp {
 
     createBars() {
 
-    }
-
-    adjustCameraPosition() {
-        // Calculate bounding sphere for group
-        // Month data
-        let monthData = sleepData[this.currentMonthName];
-        const numBars = monthData.length;
-
-        let bbox = new THREE.Box3().setFromObject(MonthlyConfig[this.currentMonthName].attributeGroups[3]);
-        let bsphere = new THREE.Sphere();
-        bbox.getBoundingSphere(bsphere);
-        let cameraScale = numBars > 10 ? APPCONFIG.CAMERA_SCALE_LARGE : APPCONFIG.CAMERA_SCALE_SMALL;
-        this.camera.position.z = bsphere.center.z + (bsphere.radius * cameraScale);
     }
 
     createLineGeometries(monthName) {

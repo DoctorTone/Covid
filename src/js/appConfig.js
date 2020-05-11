@@ -2,7 +2,7 @@
 
 const APPCONFIG = {
     ROOT_ROTATE: Math.PI/4,
-    BAR_COLOUR : 0xfff000,
+    BAR_COLOUR : 0x0000ff,
     BAR_RADIUS: 0.75,
     BAR_HEIGHT: 5,
     BAR_WIDTH: 0.75,
@@ -105,34 +105,4 @@ const APPCONFIG = {
     ROTATE_DOWN: true
 };
 
-const MonthlyConfig = {
-    "May": {
-        superGroup: null,
-        attributeGroups: null,
-        valueGroups: null,
-        trendGroups: null,
-        labelGroup: null,
-        attributeLinePositions: null,
-        bars: null
-    },
-    "June": {
-        superGroup: null,
-        attributeGroups: null,
-        valueGroups: null,
-        trendGroups: null,
-        labelGroup: null,
-        attributeLinePositions: null,
-        bars: null
-    },
-    "July": {
-        superGroup: null,
-        attributeGroups: null,
-        valueGroups: null,
-        trendGroups: null,
-        labelGroup: null,
-        attributeLinePositions: null,
-        bars: null
-    }
-};
-
-export { APPCONFIG, MonthlyConfig };
+export { APPCONFIG };
