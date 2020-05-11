@@ -138,8 +138,8 @@ class Covid extends BaseApp {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialCases);
             currentBarMesh.scale.y = this.dailyCases[i] === 0 ? 0.01 : this.dailyCases[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_CASES;
-            currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
-            currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
+            currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
+                APPCONFIG.START_POS_Z);
             barsCases.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }
@@ -148,9 +148,8 @@ class Covid extends BaseApp {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialDeaths);
             currentBarMesh.scale.y = this.dailyDeaths[i] === 0 ? 0.01 : this.dailyDeaths[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_DEATHS;
-            currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
-            currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
-            currentBarMesh.position.z = APPCONFIG.START_POS_Z;
+            currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
+                APPCONFIG.START_POS_Z + APPCONFIG.BAR_INC_Z);
             barsDeaths.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }
@@ -159,9 +158,8 @@ class Covid extends BaseApp {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialTests);
             currentBarMesh.scale.y = this.dailyTests[i] === 0 ? 0.01 : this.dailyTests[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
-            currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
-            currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
-            currentBarMesh.position.z = APPCONFIG.START_POS_Z + 5;
+            currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
+            APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * 2));
             barsTests.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }
