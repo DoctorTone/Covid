@@ -112,7 +112,9 @@ class Covid extends BaseApp {
             currentBarData = this.dailyCases[i];
             currentBarMesh = new THREE.Mesh(barGeom, barMaterial);
             currentBarMesh.scale.y = this.dailyCases[i] === 0 ? 0.01 : this.dailyCases[i];
-            currentBarMesh.position.x += (APPCONFIG.BAR_INC_X * i);
+            currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE;
+            currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
+            currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
             bars.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }
