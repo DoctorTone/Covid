@@ -12,9 +12,11 @@ import controlkit from "controlkit";
 import bootstrap from "bootstrap";
 
 import covidData from "../../data/cases.json";
+import covidTests from "../../data/tests.json";
 
 const CASES = 2;
 const DEATHS = 3;
+const DAILY_TESTS = 2;
 
 class Covid extends BaseApp {
     constructor() {
@@ -90,8 +92,17 @@ class Covid extends BaseApp {
             previousDailyDeaths = currentDayData[DEATHS];
         }
 
+        // Tests
+        let currentTestData;
+        const dailyTests = [];
+        for (let i=0; i<totalDays; ++i) {
+            currentTestData = covidTests[i];
+            dailyTests.push(currentTestData[DAILY_TESTS]);
+        }
+
         this.dailyCases = dailyCases;
         this.dailyDeaths = dailyDeaths;
+        this.dailyTests = dailyTests;
     }
 
     createScene() {
@@ -112,21 +123,46 @@ class Covid extends BaseApp {
         this.addGroundPlane();
 
         const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES } );
+        const barMaterialDeaths = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_DEATHS} );
+        const barMaterialTests = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_TESTS} );
         const barGeom = new THREE.CylinderBufferGeometry(APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_HEIGHT);
 
         // Create bars
         const numBars = this.dailyCases.length;
-        const bars = [];
+        const barsCases = [];
+        const barsDeaths = [];
+        const barsTests = [];
         let currentBarMesh;
-        let currentBarData;
+
         for (let i=0; i<numBars; ++i) {
-            currentBarData = this.dailyCases[i];
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialCases);
             currentBarMesh.scale.y = this.dailyCases[i] === 0 ? 0.01 : this.dailyCases[i];
-            currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE;
+            currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_CASES;
             currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
             currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
-            bars.push(currentBarMesh);
+            barsCases.push(currentBarMesh);
+            this.root.add(currentBarMesh);
+        }
+
+        for (let i=0; i<numBars; ++i) {
+            currentBarMesh = new THREE.Mesh(barGeom, barMaterialDeaths);
+            currentBarMesh.scale.y = this.dailyDeaths[i] === 0 ? 0.01 : this.dailyDeaths[i];
+            currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_DEATHS;
+            currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
+            currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
+            currentBarMesh.position.z = APPCONFIG.START_POS_Z;
+            barsDeaths.push(currentBarMesh);
+            this.root.add(currentBarMesh);
+        }
+
+        for (let i=0; i<numBars; ++i) {
+            currentBarMesh = new THREE.Mesh(barGeom, barMaterialTests);
+            currentBarMesh.scale.y = this.dailyTests[i] === 0 ? 0.01 : this.dailyTests[i];
+            currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
+            currentBarMesh.position.x = APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i);
+            currentBarMesh.position.y = currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2);
+            currentBarMesh.position.z = APPCONFIG.START_POS_Z + 5;
+            barsTests.push(currentBarMesh);
             this.root.add(currentBarMesh);
         }
     }
