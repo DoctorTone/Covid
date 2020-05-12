@@ -183,8 +183,11 @@ class Covid extends BaseApp {
         }
     }
 
-    createBars() {
-
+    toggleVisibility(groupName) {
+        const group = this.getObjectByName(groupName);
+        if (group) {
+            group.visible = !group.visible;
+        }
     }
 
     createLineGeometries(monthName) {
@@ -319,5 +322,9 @@ $(document).ready( () => {
     // Elements
     const toggleTests = $("#toggleTests");
 
+    toggleTests.on("click", () => {
+        app.toggleVisibility("TestGroup");
+    });
+    
     app.run();
 });
