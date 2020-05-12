@@ -137,6 +137,11 @@ class Covid extends BaseApp {
         const SECOND = 1;
         const THIRD = 2;
 
+        // Tests
+        const testGroup = new THREE.Group();
+        testGroup.name = "TestGroup";
+        this.root.add(testGroup);
+
         for (let i=0; i<numBars; ++i) {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialTests);
             currentBarMesh.scale.y = this.dailyTests[i] === 0 ? 0.01 : this.dailyTests[i];
@@ -144,8 +149,13 @@ class Covid extends BaseApp {
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * FIRST));
             barsTests.push(currentBarMesh);
-            this.root.add(currentBarMesh);
+            testGroup.add(currentBarMesh);
         }
+
+        // Cases
+        const caseGroup = new THREE.Group();
+        caseGroup.name = "CaseGroup";
+        this.root.add(caseGroup);
 
         for (let i=0; i<numBars; ++i) {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialCases);
@@ -154,8 +164,13 @@ class Covid extends BaseApp {
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * SECOND));
             barsCases.push(currentBarMesh);
-            this.root.add(currentBarMesh);
+            caseGroup.add(currentBarMesh);
         }
+
+        // Deaths
+        const deathGroup = new THREE.Group();
+        deathGroup.name = "DeathGroup";
+        this.root.add(deathGroup);
 
         for (let i=0; i<numBars; ++i) {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialDeaths);
@@ -164,7 +179,7 @@ class Covid extends BaseApp {
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * THIRD));
             barsDeaths.push(currentBarMesh);
-            this.root.add(currentBarMesh);
+            deathGroup.add(currentBarMesh);
         }
     }
 
@@ -300,6 +315,9 @@ $(document).ready( () => {
 
     app.init(container);
     app.createScene();
+
+    // Elements
+    const toggleTests = $("#toggleTests");
 
     app.run();
 });
