@@ -181,6 +181,29 @@ class Covid extends BaseApp {
             barsDeaths.push(currentBarMesh);
             deathGroup.add(currentBarMesh);
         }
+
+        // Labels
+        this.labelManager = new LabelManager();
+        const labelIndices = [0, 31, 61];
+        const labelText = ["Mar", "Apr", "May"];
+        const scale = new THREE.Vector3(15, 7.5, 1);
+
+        let labelProperty;
+        let currentIndex;
+        for (let i=0, numLabels=labelIndices.length; i<numLabels; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = labelIndices[i];
+            labelProperty.position.copy(barsDeaths[currentIndex].position);
+            labelProperty.position.y = 4;
+            labelProperty.position.z += 7.5;
+            labelProperty.scale = scale;
+            labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            const label = this.labelManager.create("Date" + i, labelText[i], labelProperty);
+            this.root.add(label.getSprite());
+        }
     }
 
     toggleVisibility(groupName) {
