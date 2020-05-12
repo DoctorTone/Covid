@@ -292,6 +292,7 @@ $(document).ready( () => {
     const scaleTests = $("#scaleTests");
     const scaleCases = $("#scaleCases");
     const scaleDeaths = $("#scaleDeaths");
+    const info = $("#info");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -319,6 +320,10 @@ $(document).ready( () => {
         currentScale = scaleDeaths.val();
         app.scaleGroup("DeathGroup", currentScale);
     });
-    
+
+    info.on("click", () => {
+        $('#infoModal').modal();
+    });
+
     app.run();
 });
