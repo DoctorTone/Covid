@@ -156,7 +156,7 @@ input:checked + .slider:before {
     width: 100%;
     height: 25px;
     border-radius: 15px;
-    background: #6e6969;
+    background: rgb(136, 135, 135);
     outline: none;
     opacity: 1;
     -webkit-transition: .2s;
@@ -171,7 +171,7 @@ input:checked + .slider:before {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: rgb(0, 0, 255);
+    background: rgb(52, 74, 199);
     cursor: pointer;
 }
 .rangeSlider::-moz-range-thumb {

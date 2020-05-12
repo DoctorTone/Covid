@@ -194,6 +194,28 @@ class Covid extends BaseApp {
             caseGroup.add(currentBarMesh);
         }
 
+        // Labels
+        const caseLabelGroup = new THREE.Group();
+        caseLabelGroup.name = "CaseGroupLabels";
+        this.root.add(caseLabelGroup);
+
+        const labelCaseScale = new THREE.Vector3(10, 6, 1);
+        const caseLabelIndex = [7, 13, 20, 26, 31, 35, 40, 44, 49, 54, 61, 66, 70];
+        for (let i=0, numLabels=caseLabelIndex.length; i<numLabels; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = caseLabelIndex[i];
+            labelProperty.position.copy(barsCases[currentIndex].position);
+            labelProperty.position.y *= 2;
+            labelProperty.position.y += 4;
+            labelProperty.scale = labelCaseScale;
+            labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            const label = this.labelManager.create("Cases" + i, this.dailyCases[currentIndex], labelProperty);
+            caseLabelGroup.add(label.getSprite());
+        }
+
         // Deaths
         const deathGroup = new THREE.Group();
         deathGroup.name = "DeathGroup";
