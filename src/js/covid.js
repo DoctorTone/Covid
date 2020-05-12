@@ -158,7 +158,12 @@ class Covid extends BaseApp {
             testGroup.add(currentBarMesh);
         }
         // Labels
-        const testLabelIndex = [38, 43, 48, 53, 58, 63, 68];
+        const testLabelGroup = new THREE.Group();
+        testLabelGroup.name = "TestGroupLabels";
+        this.root.add(testLabelGroup);
+
+        const labelTestScale = new THREE.Vector3(10, 6, 1);
+        const testLabelIndex = [40, 48, 55, 61, 64, 68, 71];
         for (let i=0, numLabels=testLabelIndex.length; i<numLabels; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
@@ -166,12 +171,12 @@ class Covid extends BaseApp {
             labelProperty.position.copy(barsTests[currentIndex].position);
             labelProperty.position.y *= 2;
             labelProperty.position.y += 4;
-            labelProperty.scale = labelScale;
-            labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+            labelProperty.scale = labelTestScale;
+            labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Tests" + i, this.dailyTests[currentIndex], labelProperty);
-            this.root.add(label.getSprite());
+            testLabelGroup.add(label.getSprite());
         }
 
         // Cases
@@ -337,6 +342,7 @@ $(document).ready( () => {
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
+        app.toggleVisibility("TestGroupLabels");
     });
 
     toggleCases.on("click", () => {
