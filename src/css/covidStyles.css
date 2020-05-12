@@ -19,26 +19,6 @@ body {
 .overlay p {
     margin-bottom: 0.25rem;
 }
-#rotate {
-    bottom: 15%;
-    right: 1%;
-    width: 22.5%;
-    color: white;
-    -webkit-touch-callout: none;
-}
-#rotate button {
-    width: 45%;
-    padding: 0.2rem 0.4rem;
-}
-#buttonLarge {
-    width: 100%;
-}
-#buttonLarge button {
-    width: 95%;
-}
-#rotate img {
-    width: 100%;
-}
 .copyright {
     position: absolute;
     bottom: 1%;
@@ -93,7 +73,6 @@ body {
     transition: 0.5s;
     padding-top: 60px;
 }
-
 .sideNav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -102,7 +81,6 @@ body {
     display: block;
     transition: 0.3s;
 }
-
 .sideNav .closebtn {
     position: absolute;
     top: 0;
@@ -110,4 +88,7 @@ body {
     font-size: 36px;
     margin-left: 50px;
 }
-  
+#visibility {
+    top: 5%;
+    right: 1%;
+}

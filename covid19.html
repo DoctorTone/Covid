@@ -9,13 +9,6 @@
         <link rel="stylesheet" href="./src/css/covidStyles.css">
     </head>
 <body>
-  <!-- Override control kit styling-->
-  <style type="text/css">
-    #controlKit .panel .head .label {
-      color: orange;
-    }
-  </style>
-
   <!-- Information modal -->
   <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
       <div class="modal-dialog" role="document">
@@ -51,10 +44,6 @@
       </div>
   </div>
 
-  <div id="guiWidth">
-
-  </div>
-
   <!-- Off canvas menu -->
   <div id="sideMenu" class="sideNav text-secondary">
     <a href="#" id="closeButton" class="closebtn">&times;</a>
@@ -77,70 +66,16 @@
     <div class="title text-left pl-5 pt-2 w-50">
       <h3>Covid-19 Data</h3>
     </div>
+    <div id="visibility" class="overlay">
+      <h4>Visibility</h4>
+
+    </div>
     <div class="copyright">
       <span>&copy DRT Software Ltd. 2020</span>
     </div>
-    <!-- <div id="rotate" class="overlay">
-      <p><strong>Zoom</strong></p>
-      <div>
-        <button type="button" id="zoomOut" class="btn btn-primary"><img src="./images/minus.png"></button>
-        <button type="button" id="zoomIn" class="btn btn-primary"><img src="./images/add.png"></button>
-      </div>
-      <p><strong>Rotate</strong></p>
-      <div class="mb-1">
-        <button type="button" id="rotateLeft" class="btn btn-primary"><img src="./images/leftWhite.png"></button>
-        <button type="button" id="rotateRight" class="btn btn-primary"><img src="./images/rightWhite.png"></button>
-      </div>
-      <div class="mb-2">
-        <button type="button" id="rotateUp" class="btn btn-primary"><img src="./images/upWhite.png"></button>
-        <button type="button" id="rotateDown" class="btn btn-primary"><img src="./images/downWhite.png"></button>
-      </div>
-      <div id="buttonLarge">
-        <button type="button" id="reset" class="btn btn-primary">Reset</button>
-      </div>
-    </div> -->
     <div id="info" class="overlay">
       <img src="./images/info.png">
     </div>
-    <!-- <div id="sleepData" class="overlay d-none d-lg-block">
-      <div id="sleepAttribute" class="w-100 overlay">
-        <div class="infoContent mb-1">
-          <span id="sleep">7h 3mins</span>
-        </div>
-        <div class="infoTitle mb-1">
-          <span>Sleep</span>
-        </div>
-      </div>
-      <div id="qualityAttribute" class="w-100 overlay">
-        <div class="infoContent mb-1">
-          <span id="quality">7h 3 mins</span>
-        </div>
-        <div class="infoTitle mb-1">
-          <span>Quality</span>
-        </div>
-      </div>
-      <div id="awakeAttribute" class="w-100 overlay">
-        <div class="infoContent mb-1">
-          <span id="awake">7h 3mins</span>
-        </div>
-        <div class="infoTitle mb-1">
-          <span>Awake</span>
-        </div>
-      </div>
-      <div id="deepAttribute" class="w-100 overlay">
-        <div class="infoContent mb-1">
-          <span id="deep">7h 3 mins</span>
-        </div>
-        <div class="infoTitle mb-1">
-          <span>Deep</span>
-        </div>
-      </div>
-      <div id="monthAttribute" class="w-xl-75 overlay mt-lg-3 pl-xl-3">
-        <button id="monthLeft" class="btn btn-purple"><</button>
-        <span class="infoTitleBtn">Month</span>
-        <button id="monthRight" class="btn btn-purple">></button>
-      </div>
-    </div> -->
     <div id="sideMenuIcon" class="overlay d-lg-none">
       <span style="font-size:25px;cursor:pointer">&#9776 More</span>
     </div>
