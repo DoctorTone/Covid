@@ -5,9 +5,9 @@ const SceneConfig = {
     ambientLightColour: 0x444444,
     pointLightColour: 0xbbbbbb,
     LightPos: {
-        x: 15,
-        y: 25,
-        z: 35
+        x: 90,
+        y: 150,
+        z: 90
     },
     ShadowWidth: 35,
     ShadowExtra: 35,
@@ -24,7 +24,11 @@ const SceneConfig = {
     },
     NEAR_PLANE: 0.1,
     FAR_PLANE: 10000,
-    FOV: 45
+    FOV: 45,
+    BACKGROUND: 0xcccccc,
+    FOG_COLOUR: 0xa0a0a0,
+    HEMISPHERE_COLOUR_START: 0x555555,
+    HEMISPHERE_COLOUR_END: 0x222222
 };
 
 export { SceneConfig };
