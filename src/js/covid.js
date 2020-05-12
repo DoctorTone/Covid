@@ -231,49 +231,6 @@ class Covid extends BaseApp {
         }
     }
 
-    redrawScene(lastMonth) {
-        // See if next scene is set up
-        let currentMonthConfig = MonthlyConfig[this.currentMonthName];
-
-        // Hide previous, show next
-        let previousMonthName = APPCONFIG.MONTHS[lastMonth];
-        MonthlyConfig[previousMonthName].superGroup.visible = false;
-        MonthlyConfig[previousMonthName].labelGroup.visible = false;
-        this.showSleepData();
-
-        if (currentMonthConfig.superGroup) {
-            //Show this month
-            currentMonthConfig.superGroup.visible = true;
-            currentMonthConfig.labelGroup.visible = true;
-            this.adjustCameraPosition();
-
-            return;
-        }
-
-        // Draw next month
-        let topGroupName = "SuperGroup" + this.currentMonthName;
-        if (this.getObjectByName(topGroupName)) return;
-
-        // Group of groups
-        const superGroup = new THREE.Group();
-        superGroup.name = "SuperGroup" + this.currentMonthName;
-        currentMonthConfig.superGroup = superGroup;
-        this.root.add(superGroup);
-
-        const labelGroup = new THREE.Group();
-        labelGroup.name = "LabelGroup" + this.currentMonthName;
-        currentMonthConfig.labelGroup = labelGroup;
-        this.root.add(labelGroup);
-
-        this.createSceneGroups(superGroup, labelGroup);
-
-        this.createBars();
-
-        this.adjustCameraPosition();
-
-        this.createLineGeometries();
-    }
-
     update() {
         let delta = this.clock.getDelta();
 
@@ -321,10 +278,15 @@ $(document).ready( () => {
 
     // Elements
     const toggleTests = $("#toggleTests");
+    const toggleCases = $("#toggleCases");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
     });
-    
+
+    toggleCases.on("click", () => {
+        app.toggleVisibility("CaseGroup");
+    })
+
     app.run();
 });
