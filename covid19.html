@@ -63,9 +63,30 @@
 
   <div id="scales" class="overlay">
     <h4>Scale</h4>
-    <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleTests">
-    <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleCases">
-    <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleDeaths">
+    <div class="row">
+      <div class="col-3">
+        <span>Tests</span>
+      </div>
+      <div class="col-9">
+        <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleTests">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <span>Cases</span>
+      </div>
+      <div class="col-9">
+        <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleCases">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <span>Deaths</span>
+      </div>
+      <div class="col-9">
+        <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleDeaths">
+      </div>
+    </div>
   </div>
 
   <div id="WebGL-Output">
