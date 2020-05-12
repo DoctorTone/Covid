@@ -279,6 +279,7 @@ $(document).ready( () => {
     // Elements
     const toggleTests = $("#toggleTests");
     const toggleCases = $("#toggleCases");
+    const toggleDeaths = $("#toggleDeaths");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -286,7 +287,11 @@ $(document).ready( () => {
 
     toggleCases.on("click", () => {
         app.toggleVisibility("CaseGroup");
-    })
+    });
+
+    toggleDeaths.on("click", () => {
+        app.toggleVisibility("DeathGroup");
+    });
 
     app.run();
 });
