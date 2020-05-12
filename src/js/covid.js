@@ -247,8 +247,8 @@ class Covid extends BaseApp {
         this.directionalLight.castShadow = !this.directionalLight.castShadow;
     }
 
-    scaleTests(scale) {
-        const testGroup = this.getObjectByName("TestGroup");
+    scaleGroup(groupName, scale) {
+        const testGroup = this.getObjectByName(groupName);
         if (testGroup) {
             testGroup.scale.y = scale;
         }
@@ -290,6 +290,8 @@ $(document).ready( () => {
     const toggleCases = $("#toggleCases");
     const toggleDeaths = $("#toggleDeaths");
     const scaleTests = $("#scaleTests");
+    const scaleCases = $("#scaleCases");
+    const scaleDeaths = $("#scaleDeaths");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -305,8 +307,18 @@ $(document).ready( () => {
 
     scaleTests.on("input", () => {
         currentScale = scaleTests.val();
-        app.scaleTests(currentScale);
+        app.scaleGroup("TestGroup", currentScale);
     });
 
+    scaleCases.on("input", () => {
+        currentScale = scaleCases.val();
+        app.scaleGroup("CaseGroup", currentScale);
+    });
+
+    scaleDeaths.on("input", () => {
+        currentScale = scaleDeaths.val();
+        app.scaleGroup("DeathGroup", currentScale);
+    });
+    
     app.run();
 });
