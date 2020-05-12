@@ -84,7 +84,7 @@ export class BaseApp {
 
     mouseClicked(event) {
         //Update mouse state
-        event.preventDefault();
+        //event.preventDefault();
         this.pickedObjects.length = 0;
 
         if(event.type === 'mouseup') {
@@ -108,7 +108,7 @@ export class BaseApp {
 
     mouseMoved(event) {
         //Update mouse state
-        event.preventDefault();
+        //event.preventDefault();
         this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     }
