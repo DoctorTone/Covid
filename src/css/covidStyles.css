@@ -174,11 +174,10 @@ input:checked + .slider:before {
     background: rgb(0, 0, 255);
     cursor: pointer;
 }
-  
 .rangeSlider::-moz-range-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: rgb(0, 0, 255);
     cursor: pointer;
 }

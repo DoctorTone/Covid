@@ -247,6 +247,13 @@ class Covid extends BaseApp {
         this.directionalLight.castShadow = !this.directionalLight.castShadow;
     }
 
+    scaleTests(scale) {
+        const testGroup = this.getObjectByName("TestGroup");
+        if (testGroup) {
+            testGroup.scale.y = scale;
+        }
+    }
+
     openSideMenu() {
         document.getElementById("sideMenu").style.width = "250px";
         document.getElementById("WebGL-Output").style.marginLeft = "250px";
@@ -276,10 +283,13 @@ $(document).ready( () => {
     app.init(container);
     app.createScene();
 
+    let currentScale;
+
     // Elements
     const toggleTests = $("#toggleTests");
     const toggleCases = $("#toggleCases");
     const toggleDeaths = $("#toggleDeaths");
+    const scaleTests = $("#scaleTests");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -291,6 +301,11 @@ $(document).ready( () => {
 
     toggleDeaths.on("click", () => {
         app.toggleVisibility("DeathGroup");
+    });
+
+    scaleTests.on("input", () => {
+        currentScale = scaleTests.val();
+        app.scaleTests(currentScale);
     });
 
     app.run();
