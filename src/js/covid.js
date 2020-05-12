@@ -122,6 +122,12 @@ class Covid extends BaseApp {
         // Add ground
         this.addGroundPlane();
 
+        // Labels
+        this.labelManager = new LabelManager();
+        let labelProperty;
+        const labelScale = new THREE.Vector3(12, 6, 1);
+        let currentIndex;
+
         const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES, flatShading: true } );
         const barMaterialDeaths = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_DEATHS, flatShading: true} );
         const barMaterialTests = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_TESTS, flatShading: true} );
@@ -150,6 +156,22 @@ class Covid extends BaseApp {
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * FIRST));
             barsTests.push(currentBarMesh);
             testGroup.add(currentBarMesh);
+        }
+        // Labels
+        const testLabelIndex = [38, 43, 48, 53, 58, 63, 68];
+        for (let i=0, numLabels=testLabelIndex.length; i<numLabels; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = testLabelIndex[i];
+            labelProperty.position.copy(barsTests[currentIndex].position);
+            labelProperty.position.y *= 2;
+            labelProperty.position.y += 4;
+            labelProperty.scale = labelScale;
+            labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            const label = this.labelManager.create("Tests" + i, this.dailyTests[currentIndex], labelProperty);
+            this.root.add(label.getSprite());
         }
 
         // Cases
@@ -183,13 +205,9 @@ class Covid extends BaseApp {
         }
 
         // Labels
-        this.labelManager = new LabelManager();
         const labelIndices = [0, 31, 61];
-        const labelText = ["Mar", "Apr", "May"];
-        const scale = new THREE.Vector3(15, 7.5, 1);
+        const labelText = ["March", "April", "May"];
 
-        let labelProperty;
-        let currentIndex;
         for (let i=0, numLabels=labelIndices.length; i<numLabels; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
@@ -197,7 +215,7 @@ class Covid extends BaseApp {
             labelProperty.position.copy(barsDeaths[currentIndex].position);
             labelProperty.position.y = 4;
             labelProperty.position.z += 7.5;
-            labelProperty.scale = scale;
+            labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
