@@ -157,6 +157,8 @@ class Covid extends BaseApp {
             barsTests.push(currentBarMesh);
             testGroup.add(currentBarMesh);
         }
+        this.barsTests = barsTests;
+
         // Labels
         const testLabelGroup = new THREE.Group();
         testLabelGroup.name = "TestGroupLabels";
@@ -170,12 +172,12 @@ class Covid extends BaseApp {
             currentIndex = testLabelIndex[i];
             labelProperty.position.copy(barsTests[currentIndex].position);
             labelProperty.position.y *= 2;
-            labelProperty.position.y += 4;
+            labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
             labelProperty.scale = labelTestScale;
             labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            const label = this.labelManager.create("Tests" + i, this.dailyTests[currentIndex], labelProperty);
+            const label = this.labelManager.create("Test" + currentIndex, this.dailyTests[currentIndex], labelProperty);
             testLabelGroup.add(label.getSprite());
         }
 
@@ -193,6 +195,7 @@ class Covid extends BaseApp {
             barsCases.push(currentBarMesh);
             caseGroup.add(currentBarMesh);
         }
+        this.barsCases = barsCases;
 
         // Labels
         const caseLabelGroup = new THREE.Group();
@@ -207,12 +210,12 @@ class Covid extends BaseApp {
             currentIndex = caseLabelIndex[i];
             labelProperty.position.copy(barsCases[currentIndex].position);
             labelProperty.position.y *= 2;
-            labelProperty.position.y += 4;
+            labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
             labelProperty.scale = labelCaseScale;
             labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            const label = this.labelManager.create("Cases" + i, this.dailyCases[currentIndex], labelProperty);
+            const label = this.labelManager.create("Case" + currentIndex, this.dailyCases[currentIndex], labelProperty);
             caseLabelGroup.add(label.getSprite());
         }
 
@@ -230,8 +233,31 @@ class Covid extends BaseApp {
             barsDeaths.push(currentBarMesh);
             deathGroup.add(currentBarMesh);
         }
+        this.barsDeaths = barsDeaths;
 
         // Labels
+        const deathLabelGroup = new THREE.Group();
+        deathLabelGroup.name = "DeathGroupLabels";
+        this.root.add(deathLabelGroup);
+
+        const labelDeathScale = new THREE.Vector3(9, 4.5, 1);
+        const deathLabelIndex = [15, 20, 26, 31, 34, 37, 40, 44, 48, 51, 54, 58, 65, 70];
+        for (let i=0, numLabels=deathLabelIndex.length; i<numLabels; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = deathLabelIndex[i];
+            labelProperty.position.copy(barsDeaths[currentIndex].position);
+            labelProperty.position.y *= 2;
+            labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
+            labelProperty.scale = labelDeathScale;
+            labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            const label = this.labelManager.create("Death" + currentIndex, this.dailyDeaths[currentIndex], labelProperty);
+            deathLabelGroup.add(label.getSprite());
+        }
+
+        // Date Labels
         const labelIndices = [0, 31, 61];
         const labelText = ["March", "April", "May"];
 
@@ -319,6 +345,43 @@ class Covid extends BaseApp {
         const testGroup = this.getObjectByName(groupName);
         if (testGroup) {
             testGroup.scale.y = scale;
+            this.redrawLabels(groupName, scale);
+        }
+    }
+
+    redrawLabels(groupName, scale) {
+        // Get all bars
+        let currentBar;
+        let height;
+        let labelName;
+        let currentLabel;
+        const barsName = groupName.slice(0, groupName.length-5);
+        let bars;
+        switch (barsName) {
+            case "Test":
+                bars = this.barsTests;
+                break;
+
+            case "Case":
+                bars = this.barsCases;
+                break;
+
+            case "Death":
+                bars = this.barsDeaths;
+                break;
+
+            default:
+                break;
+        }
+
+        for (let i=0, numBars=bars.length; i<numBars; ++i) {
+            labelName = barsName + i;
+            currentLabel = this.labelManager.getLabel(labelName);
+            if (currentLabel) {
+                currentBar = bars[i];
+                height = currentBar.position.y * 2 * scale;
+                currentLabel.setHeight(height + APPCONFIG.LABEL_VALUE_OFFSET);
+            }
         }
     }
 
@@ -369,10 +432,12 @@ $(document).ready( () => {
 
     toggleCases.on("click", () => {
         app.toggleVisibility("CaseGroup");
+        app.toggleVisibility("CaseGroupLabels");
     });
 
     toggleDeaths.on("click", () => {
         app.toggleVisibility("DeathGroup");
+        app.toggleVisibility("DeathGroupLabels");
     });
 
     scaleTests.on("input", () => {

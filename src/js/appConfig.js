@@ -61,7 +61,7 @@ const APPCONFIG = {
         y: 1.5,
         z: 1
     },
-    LABEL_VALUE_OFFSET: 1,
+    LABEL_VALUE_OFFSET: 4,
     LABEL_DATE_SCALE: {
         x: 2.5,
         y: 1.5,
