@@ -98,6 +98,11 @@ body {
     right: 1%;
     width: 12.5%;
 }
+#key {
+    top: 10%;
+    left: 5%;
+    width: 10%;
+}
 .switch {
     position: relative;
     width: 50px;
