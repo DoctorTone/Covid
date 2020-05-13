@@ -174,7 +174,7 @@ class Covid extends BaseApp {
             labelProperty.position.y *= 2;
             labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
             labelProperty.scale = labelTestScale;
-            labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
+            labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Test" + currentIndex, this.dailyTests[currentIndex], labelProperty);
@@ -212,7 +212,7 @@ class Covid extends BaseApp {
             labelProperty.position.y *= 2;
             labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
             labelProperty.scale = labelCaseScale;
-            labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
+            labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Case" + currentIndex, this.dailyCases[currentIndex], labelProperty);
@@ -250,7 +250,7 @@ class Covid extends BaseApp {
             labelProperty.position.y *= 2;
             labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
             labelProperty.scale = labelDeathScale;
-            labelProperty.textColour = "rgba(156, 107, 3, 1.0)";
+            labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Death" + currentIndex, this.dailyDeaths[currentIndex], labelProperty);
