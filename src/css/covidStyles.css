@@ -99,9 +99,11 @@ body {
     width: 12.5%;
 }
 #key {
-    top: 10%;
-    left: 5%;
-    width: 10%;
+    top: 12.5%;
+    left: 2%;
+    width: 8%;
+    border: 3px solid white;
+    border-radius: 10px;
 }
 .switch {
     position: relative;

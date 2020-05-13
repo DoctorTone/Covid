@@ -267,7 +267,7 @@ class Covid extends BaseApp {
             currentIndex = labelIndices[i];
             labelProperty.position.copy(barsDeaths[currentIndex].position);
             labelProperty.position.y = 4;
-            labelProperty.position.z += 7.5;
+            labelProperty.position.z += 10;
             labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
             labelProperty.multiLine = false;
