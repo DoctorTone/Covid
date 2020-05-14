@@ -135,6 +135,7 @@ class Covid extends BaseApp {
 
         const NationalGroup = new THREE.Group();
         NationalGroup.name = "NationalGroup";
+        NationalGroup.visible = false;
         this.root.add(NationalGroup);
         
         const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES, flatShading: true } );
@@ -284,6 +285,13 @@ class Covid extends BaseApp {
             const label = this.labelManager.create("Date" + i, labelText[i], labelProperty);
             UKGroup.add(label.getSprite());
         }
+
+        // National data
+        const boxGeom = new THREE.BoxBufferGeometry(10, 10);
+        const boxMat = new THREE.MeshLambertMaterial( { color: 0xff0000});
+        const box = new THREE.Mesh(boxGeom, boxMat);
+
+        NationalGroup.add(box);
     }
 
     toggleVisibility(groupName) {
@@ -359,7 +367,10 @@ class Covid extends BaseApp {
     }
 
     toggleView() {
-        
+        const UK = this.getObjectByName("UKGroup");
+        const Nation = this.getObjectByName("NationalGroup");
+        UK.visible = !UK.visible;
+        Nation.visible = !Nation.visible;
     }
 
     redrawLabels(groupName, scale) {
@@ -474,6 +485,7 @@ $(document).ready( () => {
         toggleFade.hide();
         fadeScreen.removeClass("d-none");
         fadeScreen.fadeTo(1000, 1, () => {
+            app.toggleView();
             fadeScreen.fadeTo(1000, 0, () => {
                 fadeScreen.addClass("d-none");
                 toggleFade.show();
