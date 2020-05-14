@@ -331,13 +331,34 @@ class Covid extends BaseApp {
 
         // National data
         const sphereGeom = new THREE.SphereBufferGeometry(APPCONFIG.SPHERE_RADIUS);
-        const sphereMat = new THREE.MeshLambertMaterial( { color: 0xff0000});
+        const sphereMatEngland = new THREE.MeshLambertMaterial( { color: 0xff0000});
+        const sphereMatScotland = new THREE.MeshLambertMaterial( { color: 0x00ff00});
+        const sphereMatWales = new THREE.MeshLambertMaterial( { color: 0x0000ff});
+        const sphereMatNIreland = new THREE.MeshLambertMaterial( { color: 0xffff00});
         let point;
         
         
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
-            point = new THREE.Mesh(sphereGeom, sphereMat);
+            point = new THREE.Mesh(sphereGeom, sphereMatEngland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
+            NationalGroup.add(point);
+        }
+
+        for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
+            point = new THREE.Mesh(sphereGeom, sphereMatScotland);
+            point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
+            NationalGroup.add(point);
+        }
+
+        for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
+            point = new THREE.Mesh(sphereGeom, sphereMatWales);
+            point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
+            NationalGroup.add(point);
+        }
+
+        for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
+            point = new THREE.Mesh(sphereGeom, sphereMatNIreland);
+            point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
             NationalGroup.add(point);
         }
     }
