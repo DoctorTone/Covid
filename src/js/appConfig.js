@@ -23,7 +23,7 @@ const APPCONFIG = {
     GROUND_HEIGHT: 1000,
     GROUND_SEGMENTS: 128,
     GROUND_MATERIAL: 0xdddddd,
-    TEX_REPEAT: 20,
+    TEX_REPEAT: 10,
     BAR_INC_X: 3.5,
     BAR_INC_Z: 5,
     BAR_COLOURS: [

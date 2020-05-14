@@ -8,6 +8,11 @@ body {
 #WebGL-Output {
     transition: margin-left .5s;
 }
+#fadeScreen {
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
 .title {
     position: absolute;
     top: 0;
