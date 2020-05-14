@@ -16,6 +16,7 @@ import covidTests from "../../data/tests.json";
 import nationalCaseData from "../../data/nationalCases.json";
 
 const CASES = 2;
+const NAT_CASES = 3;
 const DEATHS = 3;
 const DAILY_TESTS = 2;
 const NATION = 1;
@@ -115,19 +116,19 @@ class Covid extends BaseApp {
                 currentNation = currentCase[NATION];
                 switch (currentNation) {
                     case "England":
-                        casesEngland.push(currentCase);
+                        casesEngland.push(currentCase[NAT_CASES]);
                         break;
 
                     case "Northern Ireland":
-                        casesNIreland.push(currentCase);
+                        casesNIreland.push(currentCase[NAT_CASES]);
                         break;
 
                     case "Scotland":
-                        casesScotland.push(currentCase);
+                        casesScotland.push(currentCase[NAT_CASES]);
                         break;
 
                     case "Wales":
-                        casesWales.push(currentCase);
+                        casesWales.push(currentCase[NAT_CASES]);
                         break;
 
                     default:
@@ -172,11 +173,12 @@ class Covid extends BaseApp {
         // Top level groups
         const UKGroup = new THREE.Group();
         UKGroup.name = "UKGroup";
+        UKGroup.visible = false;
         this.root.add(UKGroup);
 
         const NationalGroup = new THREE.Group();
         NationalGroup.name = "NationalGroup";
-        NationalGroup.visible = false;
+        NationalGroup.visible = true;
         this.root.add(NationalGroup);
         
         const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES, flatShading: true } );
@@ -328,11 +330,16 @@ class Covid extends BaseApp {
         }
 
         // National data
-        const boxGeom = new THREE.BoxBufferGeometry(10, 10);
-        const boxMat = new THREE.MeshLambertMaterial( { color: 0xff0000});
-        const box = new THREE.Mesh(boxGeom, boxMat);
-
-        NationalGroup.add(box);
+        const sphereGeom = new THREE.SphereBufferGeometry(APPCONFIG.SPHERE_RADIUS);
+        const sphereMat = new THREE.MeshLambertMaterial( { color: 0xff0000});
+        let point;
+        
+        
+        for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
+            point = new THREE.Mesh(sphereGeom, sphereMat);
+            point.position.set(i*APPCONFIG.POINT_SPACING, this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
+            NationalGroup.add(point);
+        }
     }
 
     toggleVisibility(groupName) {
