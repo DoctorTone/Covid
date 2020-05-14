@@ -128,6 +128,15 @@ class Covid extends BaseApp {
         const labelScale = new THREE.Vector3(12, 6, 1);
         let currentIndex;
 
+        // Top level groups
+        const UKGroup = new THREE.Group();
+        UKGroup.name = "UKGroup";
+        this.root.add(UKGroup);
+
+        const NationalGroup = new THREE.Group();
+        NationalGroup.name = "NationalGroup";
+        this.root.add(NationalGroup);
+        
         const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES, flatShading: true } );
         const barMaterialDeaths = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_DEATHS, flatShading: true} );
         const barMaterialTests = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_TESTS, flatShading: true} );
@@ -146,7 +155,7 @@ class Covid extends BaseApp {
         // Tests
         const testGroup = new THREE.Group();
         testGroup.name = "TestGroup";
-        this.root.add(testGroup);
+        UKGroup.add(testGroup);
 
         for (let i=0; i<numBars; ++i) {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialTests);
@@ -162,7 +171,7 @@ class Covid extends BaseApp {
         // Labels
         const testLabelGroup = new THREE.Group();
         testLabelGroup.name = "TestGroupLabels";
-        this.root.add(testLabelGroup);
+        UKGroup.add(testLabelGroup);
 
         const labelTestScale = new THREE.Vector3(10, 6, 1);
         const testLabelIndex = [40, 48, 55, 61, 64, 68, 71];
@@ -184,7 +193,7 @@ class Covid extends BaseApp {
         // Cases
         const caseGroup = new THREE.Group();
         caseGroup.name = "CaseGroup";
-        this.root.add(caseGroup);
+        UKGroup.add(caseGroup);
 
         for (let i=0; i<numBars; ++i) {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialCases);
@@ -200,7 +209,7 @@ class Covid extends BaseApp {
         // Labels
         const caseLabelGroup = new THREE.Group();
         caseLabelGroup.name = "CaseGroupLabels";
-        this.root.add(caseLabelGroup);
+        UKGroup.add(caseLabelGroup);
 
         const labelCaseScale = new THREE.Vector3(10, 6, 1);
         const caseLabelIndex = [7, 13, 20, 26, 31, 35, 40, 44, 49, 54, 61, 66, 70];
@@ -222,7 +231,7 @@ class Covid extends BaseApp {
         // Deaths
         const deathGroup = new THREE.Group();
         deathGroup.name = "DeathGroup";
-        this.root.add(deathGroup);
+        UKGroup.add(deathGroup);
 
         for (let i=0; i<numBars; ++i) {
             currentBarMesh = new THREE.Mesh(barGeom, barMaterialDeaths);
@@ -238,7 +247,7 @@ class Covid extends BaseApp {
         // Labels
         const deathLabelGroup = new THREE.Group();
         deathLabelGroup.name = "DeathGroupLabels";
-        this.root.add(deathLabelGroup);
+        UKGroup.add(deathLabelGroup);
 
         const labelDeathScale = new THREE.Vector3(9, 4.5, 1);
         const deathLabelIndex = [15, 20, 26, 31, 34, 37, 40, 44, 48, 51, 54, 58, 65, 70];
@@ -273,7 +282,7 @@ class Covid extends BaseApp {
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Date" + i, labelText[i], labelProperty);
-            this.root.add(label.getSprite());
+            UKGroup.add(label.getSprite());
         }
     }
 
@@ -429,6 +438,7 @@ $(document).ready( () => {
     const scaleDeaths = $("#scaleDeaths");
     const info = $("#info");
     const toggleFade = $("#toggleFade");
+    const fadeScreen = $("#fadeScreen");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -462,8 +472,10 @@ $(document).ready( () => {
 
     toggleFade.on("click", () => {
         toggleFade.hide();
-        $("#fadeScreen").fadeTo(1000, 1, () => {
-            $("#fadeScreen").fadeTo(1000, 0, () => {
+        fadeScreen.removeClass("d-none");
+        fadeScreen.fadeTo(1000, 1, () => {
+            fadeScreen.fadeTo(1000, 0, () => {
+                fadeScreen.addClass("d-none");
                 toggleFade.show();
             });
         });
