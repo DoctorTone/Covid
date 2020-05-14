@@ -462,9 +462,11 @@ $(document).ready( () => {
 
     toggleFade.on("click", () => {
         toggleFade.hide();
-        $("#fadeScreen").fadeTo(1000, 1, (() => {
-            $("#fadeScreen").fadeTo(1000, 0);
-        }));
+        $("#fadeScreen").fadeTo(1000, 1, () => {
+            $("#fadeScreen").fadeTo(1000, 0, () => {
+                toggleFade.show();
+            });
+        });
     });
 
     info.on("click", () => {
