@@ -337,7 +337,7 @@ class Covid extends BaseApp {
         
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMat);
-            point.position.set(i*APPCONFIG.POINT_SPACING, this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
+            point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
             NationalGroup.add(point);
         }
     }
