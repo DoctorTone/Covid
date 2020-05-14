@@ -13,10 +13,12 @@ import bootstrap from "bootstrap";
 
 import covidData from "../../data/cases.json";
 import covidTests from "../../data/tests.json";
+import nationalCaseData from "../../data/nationalCases.json";
 
 const CASES = 2;
 const DEATHS = 3;
 const DAILY_TESTS = 2;
+const NATION = 1;
 
 class Covid extends BaseApp {
     constructor() {
@@ -100,6 +102,45 @@ class Covid extends BaseApp {
             dailyTests.push(currentTestData[DAILY_TESTS]);
         }
 
+        // National cases
+        const casesEngland = [];
+        const casesScotland = [];
+        const casesWales = [];
+        const casesNIreland = [];
+        let currentCase;
+        let currentNation;
+        for (let i=0, numCases=nationalCaseData.length; i<numCases; ++i) {
+            currentCase = nationalCaseData[i];
+            if (currentCase.includes("ConfirmedCases")) {
+                currentNation = currentCase[NATION];
+                switch (currentNation) {
+                    case "England":
+                        casesEngland.push(currentCase);
+                        break;
+
+                    case "Northern Ireland":
+                        casesNIreland.push(currentCase);
+                        break;
+
+                    case "Scotland":
+                        casesScotland.push(currentCase);
+                        break;
+
+                    case "Wales":
+                        casesWales.push(currentCase);
+                        break;
+
+                    default:
+                        console.log("No nation specified");
+                        break;
+                }
+            }
+        }
+
+        this.casesEngland = casesEngland;
+        this.casesNIreland = casesNIreland;
+        this.casesScotland = casesScotland;
+        this.casesWales = casesWales;
         this.dailyCases = dailyCases;
         this.dailyDeaths = dailyDeaths;
         this.dailyTests = dailyTests;
