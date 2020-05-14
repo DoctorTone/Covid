@@ -349,6 +349,10 @@ class Covid extends BaseApp {
         }
     }
 
+    toggleView() {
+        
+    }
+
     redrawLabels(groupName, scale) {
         // Get all bars
         let currentBar;
@@ -424,6 +428,7 @@ $(document).ready( () => {
     const scaleCases = $("#scaleCases");
     const scaleDeaths = $("#scaleDeaths");
     const info = $("#info");
+    const toggleFade = $("#toggleFade");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -453,6 +458,13 @@ $(document).ready( () => {
     scaleDeaths.on("input", () => {
         currentScale = scaleDeaths.val();
         app.scaleGroup("DeathGroup", currentScale);
+    });
+
+    toggleFade.on("click", () => {
+        toggleFade.hide();
+        $("#fadeScreen").fadeTo(1000, 1, (() => {
+            $("#fadeScreen").fadeTo(1000, 0);
+        }));
     });
 
     info.on("click", () => {

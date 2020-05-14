@@ -14,10 +14,12 @@ body {
     z-index: 1000;
     color: white;
     background: #575252;
+    opacity: 0;
 }
 #toggleView {
     top: 30%;
     left: 2%;
+    z-index: 1000;
 }
 .title {
     position: absolute;
