@@ -12,6 +12,12 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
+    color: white;
+    background: #575252;
+}
+#toggleView {
+    top: 30%;
+    left: 2%;
 }
 .title {
     position: absolute;
