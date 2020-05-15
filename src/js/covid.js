@@ -173,12 +173,12 @@ class Covid extends BaseApp {
         // Top level groups
         const UKGroup = new THREE.Group();
         UKGroup.name = "UKGroup";
-        UKGroup.visible = false;
+        UKGroup.visible = true;
         this.root.add(UKGroup);
 
         const NationalGroup = new THREE.Group();
         NationalGroup.name = "NationalGroup";
-        NationalGroup.visible = true;
+        NationalGroup.visible = false;
         this.root.add(NationalGroup);
         
         const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES, flatShading: true } );
@@ -440,6 +440,13 @@ class Covid extends BaseApp {
         const Nation = this.getObjectByName("NationalGroup");
         UK.visible = !UK.visible;
         Nation.visible = !Nation.visible;
+        if (UK.visible) {
+            $("#key").removeClass("d-none");
+            $("#keyNational").addClass("d-none");
+        } else {
+            $("#key").addClass("d-none");
+            $("#keyNational").removeClass("d-none");
+        }
     }
 
     redrawLabels(groupName, scale) {

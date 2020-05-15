@@ -111,7 +111,8 @@ body {
     right: 1%;
     width: 12.5%;
 }
-#key {
+#key,
+#keyNational {
     top: 12.5%;
     left: 2%;
     width: 8%;
