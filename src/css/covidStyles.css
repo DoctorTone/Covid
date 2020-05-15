@@ -101,12 +101,14 @@ body {
     font-size: 36px;
     margin-left: 50px;
 }
-#visibility {
+#visibility,
+#visibilityNational {
     top: 5%;
     right: 1%;
     width: 10%;
 }
-#scales {
+#scales,
+#scalesNational {
     top: 25%;
     right: 1%;
     width: 12.5%;
@@ -115,7 +117,7 @@ body {
 #keyNational {
     top: 12.5%;
     left: 2%;
-    width: 8%;
+    width: 9%;
     border: 3px solid white;
     border-radius: 10px;
 }

@@ -94,6 +94,18 @@
     </div>
   </div>
 
+  <div id="scalesNational" class="overlay text-white d-none">
+    <h4 class="text-secondary">Scale</h4>
+    <div class="row">
+      <div class="col-3">
+        <span>All</span>
+      </div>
+      <div class="col-9">
+        <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleAll">
+      </div>
+    </div>
+  </div>
+
   <div id="toggleView" class="overlay">
     <button type="button" id="toggleFade" class="btn btn-primary">Nations <--> UK</button>
   </div>
@@ -131,22 +143,28 @@
         Countries
       </p>
       <div>
+        <span class="bg-warning">
+          &nbsp&nbsp&nbsp
+        </span>
+        <span class="pl-2">England</span>
+      </div>
+      <div>
         <span class="bg-primary">
           &nbsp&nbsp&nbsp
         </span>
-        <span class="pl-2">Tests</span>
+        <span class="pl-2">Scotland</span>
+      </div>
+      <div>
+        <span class="bg-danger">
+          &nbsp&nbsp&nbsp
+        </span>
+        <span class="pl-2">Wales</span>
       </div>
       <div>
         <span class="bg-success">
           &nbsp&nbsp&nbsp
         </span>
-        <span class="pl-2">Cases</span>
-      </div>
-      <div>
-        <span class="bg-warning">
-          &nbsp&nbsp&nbsp
-        </span>
-        <span class="pl-2">Deaths</span>
+        <span class="pl-2">N.Ireland</span>
       </div>
     </div>
     <div id="visibility" class="overlay text-white">
@@ -180,6 +198,53 @@
         <div class="col-6">
           <label class="switch">
             <input id="toggleDeaths" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="visibilityNational" class="overlay text-white d-none">
+      <h4 class="text-secondary">Visibility</h4>
+      <div class="row">
+        <div class="col-6 text-left">
+          <span>England</span>
+        </div>
+        <div class="col-6">
+          <label class="switch">
+            <input id="toggleEngland" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 text-left">
+          <span>Scotland</span>
+        </div>
+        <div class="col-6">
+          <label class="switch">
+            <input id="toggleScotland" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 text-left">
+          <span>Wales</span>
+        </div>
+        <div class="col-6">
+          <label class="switch">
+            <input id="toggleWales" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 text-left">
+          <span>N.Ireland</span>
+        </div>
+        <div class="col-6">
+          <label class="switch">
+            <input id="toggleNIreland" type="checkbox" checked>
             <span class="slider round"></span>
           </label>
         </div>

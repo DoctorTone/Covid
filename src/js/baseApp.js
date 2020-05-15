@@ -42,6 +42,7 @@ export class BaseApp {
     createRenderer() {
         this.renderer = new THREE.WebGLRenderer( {antialias : true, alpha: true});
         this.renderer.setPixelRatio( window.devicePixelRatio );
+        // this.renderer.setClearColor(SceneConfig.clearColour, 1.0);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.VSMShadowMap;
 
@@ -124,13 +125,22 @@ export class BaseApp {
         let scene = new THREE.Scene();
         this.scenes.push(scene);
 
+        /*
+        let ambientLight = new THREE.AmbientLight(SceneConfig.ambientLightColour);
+        scene.add(ambientLight);
+        */
+
+        
         scene.background = new THREE.Color(SceneConfig.BACKGROUND);
         scene.fog = new THREE.Fog( 0xa0a0a0 );
+        
 
+        
         let light = new THREE.HemisphereLight( 0x555555, 0x222222 );
 		light.position.set( 0, 2000, 0 );
         scene.add( light );
         this.hemisphereLight = light;
+        
 
         
         var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );

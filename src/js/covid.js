@@ -181,9 +181,9 @@ class Covid extends BaseApp {
         NationalGroup.visible = false;
         this.root.add(NationalGroup);
         
-        const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES, flatShading: true } );
-        const barMaterialDeaths = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_DEATHS, flatShading: true} );
-        const barMaterialTests = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_TESTS, flatShading: true} );
+        const barMaterialCases = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES} );
+        const barMaterialDeaths = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_DEATHS} );
+        const barMaterialTests = new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_TESTS} );
         const barGeom = new THREE.CylinderBufferGeometry(APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_RADIUS, APPCONFIG.BAR_HEIGHT);
 
         // Create bars
@@ -265,7 +265,7 @@ class Covid extends BaseApp {
             labelProperty.position.y *= 2;
             labelProperty.position.y += APPCONFIG.LABEL_VALUE_OFFSET;
             labelProperty.scale = labelCaseScale;
-            labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
+            labelProperty.textColour = "rgba(10, 10, 10, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Case" + currentIndex, this.dailyCases[currentIndex], labelProperty);
@@ -331,7 +331,7 @@ class Covid extends BaseApp {
 
         // National data
         const sphereGeom = new THREE.SphereBufferGeometry(APPCONFIG.SPHERE_RADIUS);
-        const sphereMatEngland = new THREE.MeshLambertMaterial( { color: 0xffffff});
+        const sphereMatEngland = new THREE.MeshLambertMaterial( { color: 0xFFA500});
         const sphereMatScotland = new THREE.MeshLambertMaterial( { color: 0x0000ff});
         const sphereMatWales = new THREE.MeshLambertMaterial( { color: 0xff0000});
         const sphereMatNIreland = new THREE.MeshLambertMaterial( { color: 0x00ff00});
@@ -440,12 +440,29 @@ class Covid extends BaseApp {
         const Nation = this.getObjectByName("NationalGroup");
         UK.visible = !UK.visible;
         Nation.visible = !Nation.visible;
+
+        // Toggle UI elements
+        const key = $("#key");
+        const keyNational = $("#keyNational");
+        const visibility = $("#visibility");
+        const visibilityNational = $("#visibilityNational");
+        const scales = $("#scales");
+        const scalesNational = $("#scalesNational");
+
         if (UK.visible) {
-            $("#key").removeClass("d-none");
-            $("#keyNational").addClass("d-none");
+            key.removeClass("d-none");
+            keyNational.addClass("d-none");
+            visibility.removeClass("d-none");
+            visibilityNational.addClass("d-none");
+            scales.removeClass("d-none");
+            scalesNational.addClass("d-none");
         } else {
-            $("#key").addClass("d-none");
-            $("#keyNational").removeClass("d-none");
+            key.addClass("d-none");
+            keyNational.removeClass("d-none");
+            visibility.addClass("d-none");
+            visibilityNational.removeClass("d-none");
+            scales.addClass("d-none");
+            scalesNational.removeClass("d-none");
         }
     }
 
