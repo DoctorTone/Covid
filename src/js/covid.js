@@ -331,10 +331,10 @@ class Covid extends BaseApp {
 
         // National data
         const sphereGeom = new THREE.SphereBufferGeometry(APPCONFIG.SPHERE_RADIUS);
-        const sphereMatEngland = new THREE.MeshLambertMaterial( { color: 0xff0000});
-        const sphereMatScotland = new THREE.MeshLambertMaterial( { color: 0x00ff00});
-        const sphereMatWales = new THREE.MeshLambertMaterial( { color: 0x0000ff});
-        const sphereMatNIreland = new THREE.MeshLambertMaterial( { color: 0xffff00});
+        const sphereMatEngland = new THREE.MeshLambertMaterial( { color: 0xffffff});
+        const sphereMatScotland = new THREE.MeshLambertMaterial( { color: 0x0000ff});
+        const sphereMatWales = new THREE.MeshLambertMaterial( { color: 0xff0000});
+        const sphereMatNIreland = new THREE.MeshLambertMaterial( { color: 0x00ff00});
         let point;
         
         
