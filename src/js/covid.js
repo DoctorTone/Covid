@@ -326,7 +326,7 @@ class Covid extends BaseApp {
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
             const label = this.labelManager.create("Date" + i, labelText[i], labelProperty);
-            UKGroup.add(label.getSprite());
+            this.root.add(label.getSprite());
         }
 
         // National data
