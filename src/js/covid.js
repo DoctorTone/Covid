@@ -337,29 +337,45 @@ class Covid extends BaseApp {
         const sphereMatNIreland = new THREE.MeshLambertMaterial( { color: 0x00ff00});
         let point;
         
+        // Group for each nation
+        const EnglandGroup = new THREE.Group();
+        EnglandGroup.name = "EnglandGroup";
+        NationalGroup.add(EnglandGroup);
+
+        const ScotlandGroup = new THREE.Group();
+        ScotlandGroup.name = "ScotlandGroup";
+        NationalGroup.add(ScotlandGroup);
+
+        const WalesGroup = new THREE.Group();
+        WalesGroup.name = "WalesGroup";
+        NationalGroup.add(WalesGroup);
+
+        const NIrelandGroup = new THREE.Group();
+        NIrelandGroup.name = "NIrelandGroup";
+        NationalGroup.add(NIrelandGroup);
         
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatEngland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
-            NationalGroup.add(point);
+            EnglandGroup.add(point);
         }
 
         for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatScotland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
-            NationalGroup.add(point);
+            ScotlandGroup.add(point);
         }
 
         for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatWales);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
-            NationalGroup.add(point);
+            WalesGroup.add(point);
         }
 
         for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatNIreland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
-            NationalGroup.add(point);
+            NIrelandGroup.add(point);
         }
     }
 
