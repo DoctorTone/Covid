@@ -560,6 +560,9 @@ $(document).ready( () => {
     const toggleFade = $("#toggleFade");
     const fadeScreen = $("#fadeScreen");
     const toggleEngland = $("#toggleEngland");
+    const toggleScotland = $("#toggleScotland");
+    const toggleWales = $("#toggleWales");
+    const toggleNIreland = $("#toggleNIreland");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -578,6 +581,18 @@ $(document).ready( () => {
 
     toggleEngland.on("click", () => {
         app.toggleVisibility("EnglandGroup");
+    });
+
+    toggleScotland.on("click", () => {
+        app.toggleVisibility("ScotlandGroup");
+    });
+
+    toggleWales.on("click", () => {
+        app.toggleVisibility("WalesGroup");
+    });
+
+    toggleNIreland.on("click", () => {
+        app.toggleVisibility("NIrelandGroup");
     });
 
     scaleTests.on("input", () => {
