@@ -559,6 +559,7 @@ $(document).ready( () => {
     const info = $("#info");
     const toggleFade = $("#toggleFade");
     const fadeScreen = $("#fadeScreen");
+    const toggleEngland = $("#toggleEngland");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -573,6 +574,10 @@ $(document).ready( () => {
     toggleDeaths.on("click", () => {
         app.toggleVisibility("DeathGroup");
         app.toggleVisibility("DeathGroupLabels");
+    });
+
+    toggleEngland.on("click", () => {
+        app.toggleVisibility("EnglandGroup");
     });
 
     scaleTests.on("input", () => {
