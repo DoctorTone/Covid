@@ -563,6 +563,7 @@ $(document).ready( () => {
     const toggleScotland = $("#toggleScotland");
     const toggleWales = $("#toggleWales");
     const toggleNIreland = $("#toggleNIreland");
+    const scaleAll = $("#scaleAll");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
