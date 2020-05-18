@@ -611,6 +611,11 @@ $(document).ready( () => {
         app.scaleGroup("DeathGroup", currentScale);
     });
 
+    scaleAll.on("input", () => {
+        currentScale = scaleAll.val();
+        app.scaleGroup("NationalGroup", currentScale);
+    });
+
     toggleFade.on("click", () => {
         toggleFade.hide();
         fadeScreen.removeClass("d-none");
