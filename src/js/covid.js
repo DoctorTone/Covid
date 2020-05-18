@@ -353,30 +353,44 @@ class Covid extends BaseApp {
         const NIrelandGroup = new THREE.Group();
         NIrelandGroup.name = "NIrelandGroup";
         NationalGroup.add(NIrelandGroup);
+
+        const heights = [];
+        const points = [];
         
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatEngland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
             EnglandGroup.add(point);
+            points.push(point);
+            heights.push(point.position.y);
         }
 
         for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatScotland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
             ScotlandGroup.add(point);
+            points.push(point);
+            heights.push(point.position.y);
         }
 
         for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatWales);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
             WalesGroup.add(point);
+            points.push(point);
+            heights.push(point.position.y);
         }
 
         for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatNIreland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
             NIrelandGroup.add(point);
+            points.push(point);
+            heights.push(point.position.y);
         }
+
+        this.points = points;
+        this.heights = heights;
     }
 
     toggleVisibility(groupName) {
@@ -448,6 +462,17 @@ class Covid extends BaseApp {
         if (testGroup) {
             testGroup.scale.y = scale;
             this.redrawLabels(groupName, scale);
+        }
+    }
+
+    scaleCases(groupName, scale) {
+        const testGroup = this.getObjectByName(groupName);
+        if (testGroup) {
+            let height;
+            for (let i=0, numPoints=this.points.length; i<numPoints; ++i) {
+                height = this.heights[i];
+                this.points[i].position.y = height * scale;
+            }
         }
     }
 
@@ -613,7 +638,7 @@ $(document).ready( () => {
 
     scaleAll.on("input", () => {
         currentScale = scaleAll.val();
-        app.scaleGroup("NationalGroup", currentScale);
+        app.scaleCases("NationalGroup", currentScale);
     });
 
     toggleFade.on("click", () => {
