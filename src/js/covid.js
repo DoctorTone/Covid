@@ -565,12 +565,17 @@ class Covid extends BaseApp {
             const labelName = "Cases";
             let currentLabelName;
             let currentLabel;
+            let currentIndex;
 
             for (let i=0; i<APPCONFIG.NUM_COUNTRIES; ++i) {
-                currentLabelName = `${labelName}${halfWay}`;
-                currentLabel = this.labelManager.getLabel(currentLabelName);
-                if (currentLabel) {
-                    currentLabel.setHeight(this.points[halfWay].position.y + 4);
+                currentIndex = halfWay + (i*numCases);
+                for (let j=0; j<APPCONFIG.LABELS_PER_COUNTRY; ++j) {
+                    currentLabelName = `${labelName}${currentIndex}`;
+                    currentLabel = this.labelManager.getLabel(currentLabelName);
+                    if (currentLabel) {
+                        currentLabel.setHeight(this.points[currentIndex].position.y + 4);
+                    }
+                    currentIndex = last + (i*numCases);
                 }
             }
         }

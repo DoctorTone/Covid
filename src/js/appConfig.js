@@ -114,7 +114,8 @@ const APPCONFIG = {
     GROUP_ROTATE_OFFSET: Math.PI,
     ROTATE_UP: false,
     ROTATE_DOWN: true,
-    NUM_COUNTRIES: 4
+    NUM_COUNTRIES: 4,
+    LABELS_PER_COUNTRY: 2
 };
 
 export { APPCONFIG };
