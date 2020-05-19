@@ -477,7 +477,8 @@ class Covid extends BaseApp {
         this.points = points;
         this.heights = heights;
 
-        this.createLineGeometries(this.root);
+        this.createRollingAverage(barsCases, caseGroup);
+        this.createRollingAverage(barsDeaths, deathGroup);
     }
 
     toggleVisibility(groupName) {
@@ -487,13 +488,13 @@ class Covid extends BaseApp {
         }
     }
 
-    createLineGeometries(group) {
+    createRollingAverage(data, group) {
         // Cases
         // Positions
         const positions = [];
         let currentPosition;
-        for (let i=0,numPoints=this.barsCases.length; i<numPoints; ++i) {
-            currentPosition = this.barsCases[i].position;
+        for (let i=0,numPoints=data.length; i<numPoints; ++i) {
+            currentPosition = data[i].position;
             positions.push(currentPosition.x, currentPosition.y * 2, currentPosition.z);
         }
 
@@ -501,7 +502,7 @@ class Covid extends BaseApp {
         const avgStep = 7;
         let currentTotal = 0;
         for (let i=0; i<avgStep; ++i) {
-            currentTotal += (this.barsCases[i].position.y * 2);
+            currentTotal += (data[i].position.y * 2);
         }
         let currentAvg = currentTotal/avgStep;
         const averages = [];
@@ -510,11 +511,13 @@ class Covid extends BaseApp {
         let startPoint = (avgStep - 1) * 3;
         let currentLowerBound = 0;
         let currentUpperBound = 7;
-        for (let i=startPoint,numPoints=positions.length; i<(numPoints/3); ++i, startPoint+=3) {
+        const startDay = startPoint/3;
+        const endDay = positions.length/3;
+        for (let i=startDay,numPoints=positions.length; i<(endDay-1); ++i, startPoint+=3) {
             averages.push(positions[startPoint], currentAvg, positions[startPoint + 2]+2);
-            currentTotal -= this.barsCases[currentLowerBound].position.y * 2;
+            currentTotal -= data[currentLowerBound].position.y * 2;
             ++currentLowerBound;
-            currentTotal += this.barsCases[currentUpperBound].position.y * 2;
+            currentTotal += data[currentUpperBound].position.y * 2;
             ++currentUpperBound;
             currentAvg = currentTotal/avgStep;
         }
@@ -537,7 +540,6 @@ class Covid extends BaseApp {
 
         lineMat.resolution.set( window.innerWidth, window.innerHeight );
 
-        const numLineGeometries = numPositions;
         let lineGeom;
         let line;
         const scale = 1;
