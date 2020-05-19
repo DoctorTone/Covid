@@ -357,6 +357,7 @@ class Covid extends BaseApp {
         const heights = [];
         const points = [];
         
+        // English cases
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatEngland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
@@ -365,22 +366,31 @@ class Covid extends BaseApp {
             heights.push(point.position.y);
         }
 
+        // English labels
         let label;
-        const caseLabelIndices = [Math.round(this.casesEngland.length/2), this.casesEngland.length-1];
+        const halfWay = Math.round(this.casesEngland.length/2);
+        const last = this.casesEngland.length-1;
+        const numCases = this.casesEngland.length;
+
+        let caseLabelIndices = [halfWay, last];
+        currentIndex = halfWay;
+        let pointsIndex = halfWay;
         for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
-            labelProperty.position.copy(points[caseLabelIndices[i]].position);
+            labelProperty.position.copy(points[pointsIndex].position);
             labelProperty.position.y += 4;
             labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            label = this.labelManager.create("EnglandCase", this.casesEngland[caseLabelIndices[i]], labelProperty);
+            label = this.labelManager.create("Cases" + pointsIndex, this.casesEngland[currentIndex], labelProperty);
             EnglandGroup.add(label.getSprite());
+            currentIndex = last;
+            pointsIndex = last;
         }
         
-
+        // Scottish cases
         for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatScotland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
@@ -389,18 +399,26 @@ class Covid extends BaseApp {
             heights.push(point.position.y);
         }
 
-        labelProperty = {};
-        labelProperty.position = new THREE.Vector3();
-        currentIndex = points.length - 1;
-        labelProperty.position.copy(points[currentIndex].position);
-        labelProperty.position.y += 4;
-        labelProperty.scale = labelScale;
-        labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
-        labelProperty.multiLine = false;
-        labelProperty.visibility = true;
-        label = this.labelManager.create("ScotlandCase", this.casesScotland[this.casesScotland.length-1], labelProperty);
-        ScotlandGroup.add(label.getSprite());
+        // Scottish labels
+        currentIndex = halfWay;
+        pointsIndex = halfWay + numCases;
+        for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = caseLabelIndices[i];
+            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.y += 4;
+            labelProperty.scale = labelScale;
+            labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            label = this.labelManager.create("Cases" + pointsIndex, this.casesScotland[currentIndex], labelProperty);
+            ScotlandGroup.add(label.getSprite());
+            currentIndex = last;
+            pointsIndex = last + numCases;
+        }
 
+        // Wales cases
         for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatWales);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
@@ -409,18 +427,26 @@ class Covid extends BaseApp {
             heights.push(point.position.y);
         }
 
-        labelProperty = {};
-        labelProperty.position = new THREE.Vector3();
-        currentIndex = points.length - 1;
-        labelProperty.position.copy(points[currentIndex].position);
-        labelProperty.position.y += 4;
-        labelProperty.scale = labelScale;
-        labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
-        labelProperty.multiLine = false;
-        labelProperty.visibility = true;
-        label = this.labelManager.create("WalesCase", this.casesWales[this.casesWales.length-1], labelProperty);
-        WalesGroup.add(label.getSprite());
+        // Wales labels
+        currentIndex = halfWay;
+        pointsIndex = halfWay + (numCases * 2);
+        for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = caseLabelIndices[i];
+            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.y += 4;
+            labelProperty.scale = labelScale;
+            labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            label = this.labelManager.create("Cases" + pointsIndex, this.casesWales[currentIndex], labelProperty);
+            WalesGroup.add(label.getSprite());
+            currentIndex = last;
+            pointsIndex = last + (numCases * 2);
+        }
 
+        // NIreland cases
         for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatNIreland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
@@ -429,18 +455,25 @@ class Covid extends BaseApp {
             heights.push(point.position.y);
         }
 
-        labelProperty = {};
-        labelProperty.position = new THREE.Vector3();
-        currentIndex = points.length - 1;
-        labelProperty.position.copy(points[currentIndex].position);
-        labelProperty.position.y += 4;
-        labelProperty.scale = labelScale;
-        labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
-        labelProperty.multiLine = false;
-        labelProperty.visibility = true;
-        label = this.labelManager.create("NIrelandCase", this.casesNIreland[this.casesNIreland.length-1], labelProperty);
-        NIrelandGroup.add(label.getSprite());
-
+        // NIreland labels
+        currentIndex = halfWay;
+        pointsIndex = halfWay + (numCases * 3);
+        for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            currentIndex = caseLabelIndices[i];;
+            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.y += 4;
+            labelProperty.scale = labelScale;
+            labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            label = this.labelManager.create("Cases" + pointsIndex, this.casesNIreland[currentIndex], labelProperty);
+            NIrelandGroup.add(label.getSprite());
+            currentIndex = last;
+            pointsIndex = last + (numCases * 3);
+        }
+        
         this.points = points;
         this.heights = heights;
     }
@@ -524,6 +557,12 @@ class Covid extends BaseApp {
             for (let i=0, numPoints=this.points.length; i<numPoints; ++i) {
                 height = this.heights[i];
                 this.points[i].position.y = height * scale;
+            }
+            // Labels
+            const labelName = "Englandcase0";
+            const currentLabel = this.labelManager.getLabel(labelName);
+            if (currentLabel) {
+
             }
         }
     }
