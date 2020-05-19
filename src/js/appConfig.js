@@ -113,7 +113,8 @@ const APPCONFIG = {
     GROUP_ROTATE_SPEED: 3.5,
     GROUP_ROTATE_OFFSET: Math.PI,
     ROTATE_UP: false,
-    ROTATE_DOWN: true
+    ROTATE_DOWN: true,
+    NUM_COUNTRIES: 4
 };
 
 export { APPCONFIG };

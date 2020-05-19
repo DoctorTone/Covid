@@ -559,10 +559,19 @@ class Covid extends BaseApp {
                 this.points[i].position.y = height * scale;
             }
             // Labels
-            const labelName = "Englandcase0";
-            const currentLabel = this.labelManager.getLabel(labelName);
-            if (currentLabel) {
+            const halfWay = Math.round(this.casesEngland.length/2);
+            const last = this.casesEngland.length - 1;
+            const numCases = this.casesEngland.length;
+            const labelName = "Cases";
+            let currentLabelName;
+            let currentLabel;
 
+            for (let i=0; i<APPCONFIG.NUM_COUNTRIES; ++i) {
+                currentLabelName = `${labelName}${halfWay}`;
+                currentLabel = this.labelManager.getLabel(currentLabelName);
+                if (currentLabel) {
+                    currentLabel.setHeight(this.points[halfWay].position.y + 4);
+                }
             }
         }
     }
