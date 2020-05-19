@@ -477,7 +477,7 @@ class Covid extends BaseApp {
         this.points = points;
         this.heights = heights;
 
-        this.createLineGeometries(caseGroup);
+        this.createLineGeometries(this.root);
     }
 
     toggleVisibility(groupName) {
@@ -497,17 +497,39 @@ class Covid extends BaseApp {
             positions.push(currentPosition.x, currentPosition.y * 2, currentPosition.z);
         }
 
+        // Rolling average
+        const avgStep = 7;
+        let currentTotal = 0;
+        for (let i=0; i<avgStep; ++i) {
+            currentTotal += (this.barsCases[i].position.y * 2);
+        }
+        let currentAvg = currentTotal/avgStep;
+        const averages = [];
+
+        // Starting point in positions array
+        let startPoint = (avgStep - 1) * 3;
+        let currentLowerBound = 0;
+        let currentUpperBound = 7;
+        for (let i=startPoint,numPoints=positions.length; i<(numPoints/3); ++i, startPoint+=3) {
+            averages.push(positions[startPoint], currentAvg, positions[startPoint + 2]+2);
+            currentTotal -= this.barsCases[currentLowerBound].position.y * 2;
+            ++currentLowerBound;
+            currentTotal += this.barsCases[currentUpperBound].position.y * 2;
+            ++currentUpperBound;
+            currentAvg = currentTotal/avgStep;
+        }
+
         // Lines
         const lineColour = new THREE.Color();
         lineColour.setHex(0xdadada);
         let lineColours = [];
-        const numPositions = positions.length;
+        const numPositions = averages.length;
         for(let i=0; i<numPositions; ++i) {
             lineColours.push(lineColour.r, lineColour.g, lineColour.b);
         }
 
         let lineMat = new LineMaterial( {
-            color: 0xffffff,
+            color: 0x000000,
             linewidth: 10,
             vertexColors: THREE.VertexColors,
             dashed: false
@@ -521,7 +543,7 @@ class Covid extends BaseApp {
         const scale = 1;
 
         lineGeom = new LineGeometry();
-        lineGeom.setPositions(positions);
+        lineGeom.setPositions(averages);
         lineGeom.setColors(lineColours);
 
         line = new Line2(lineGeom, lineMat);
