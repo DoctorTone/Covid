@@ -16,6 +16,10 @@ body {
     background: #575252;
     opacity: 0;
 }
+#fadeScreen img {
+    height: 25%;
+    margin-top: 15%;
+}
 #toggleView {
     top: 30%;
     left: 2%;
