@@ -365,6 +365,22 @@ class Covid extends BaseApp {
             heights.push(point.position.y);
         }
 
+        let label;
+        const caseLabelIndices = [Math.round(this.casesEngland.length/2), this.casesEngland.length-1];
+        for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
+            labelProperty = {};
+            labelProperty.position = new THREE.Vector3();
+            labelProperty.position.copy(points[caseLabelIndices[i]].position);
+            labelProperty.position.y += 4;
+            labelProperty.scale = labelScale;
+            labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+            labelProperty.multiLine = false;
+            labelProperty.visibility = true;
+            label = this.labelManager.create("EnglandCase", this.casesEngland[caseLabelIndices[i]], labelProperty);
+            EnglandGroup.add(label.getSprite());
+        }
+        
+
         for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatScotland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
@@ -372,6 +388,18 @@ class Covid extends BaseApp {
             points.push(point);
             heights.push(point.position.y);
         }
+
+        labelProperty = {};
+        labelProperty.position = new THREE.Vector3();
+        currentIndex = points.length - 1;
+        labelProperty.position.copy(points[currentIndex].position);
+        labelProperty.position.y += 4;
+        labelProperty.scale = labelScale;
+        labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+        labelProperty.multiLine = false;
+        labelProperty.visibility = true;
+        label = this.labelManager.create("ScotlandCase", this.casesScotland[this.casesScotland.length-1], labelProperty);
+        ScotlandGroup.add(label.getSprite());
 
         for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatWales);
@@ -381,6 +409,18 @@ class Covid extends BaseApp {
             heights.push(point.position.y);
         }
 
+        labelProperty = {};
+        labelProperty.position = new THREE.Vector3();
+        currentIndex = points.length - 1;
+        labelProperty.position.copy(points[currentIndex].position);
+        labelProperty.position.y += 4;
+        labelProperty.scale = labelScale;
+        labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+        labelProperty.multiLine = false;
+        labelProperty.visibility = true;
+        label = this.labelManager.create("WalesCase", this.casesWales[this.casesWales.length-1], labelProperty);
+        WalesGroup.add(label.getSprite());
+
         for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, sphereMatNIreland);
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
@@ -388,6 +428,18 @@ class Covid extends BaseApp {
             points.push(point);
             heights.push(point.position.y);
         }
+
+        labelProperty = {};
+        labelProperty.position = new THREE.Vector3();
+        currentIndex = points.length - 1;
+        labelProperty.position.copy(points[currentIndex].position);
+        labelProperty.position.y += 4;
+        labelProperty.scale = labelScale;
+        labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
+        labelProperty.multiLine = false;
+        labelProperty.visibility = true;
+        label = this.labelManager.create("NIrelandCase", this.casesNIreland[this.casesNIreland.length-1], labelProperty);
+        NIrelandGroup.add(label.getSprite());
 
         this.points = points;
         this.heights = heights;
