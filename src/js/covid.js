@@ -476,6 +476,8 @@ class Covid extends BaseApp {
         
         this.points = points;
         this.heights = heights;
+
+        this.createLineGeometries(caseGroup);
     }
 
     toggleVisibility(groupName) {
@@ -485,15 +487,21 @@ class Covid extends BaseApp {
         }
     }
 
-    createLineGeometries(monthName) {
-        // Monthly data
-        let currentMonthConfig = MonthlyConfig[monthName];
+    createLineGeometries(group) {
+        // Cases
+        // Positions
+        const positions = [];
+        let currentPosition;
+        for (let i=0,numPoints=this.barsCases.length; i<numPoints; ++i) {
+            currentPosition = this.barsCases[i].position;
+            positions.push(currentPosition.x, currentPosition.y * 2, currentPosition.z);
+        }
 
         // Lines
         const lineColour = new THREE.Color();
         lineColour.setHex(0xdadada);
         let lineColours = [];
-        const numPositions = currentMonthConfig.attributeLinePositions[0].length;
+        const numPositions = positions.length;
         for(let i=0; i<numPositions; ++i) {
             lineColours.push(lineColour.r, lineColour.g, lineColour.b);
         }
@@ -507,23 +515,22 @@ class Covid extends BaseApp {
 
         lineMat.resolution.set( window.innerWidth, window.innerHeight );
 
-        const numLineGeometries = currentMonthConfig.attributeLinePositions.length;
+        const numLineGeometries = numPositions;
         let lineGeom;
         let line;
         const scale = 1;
 
-        for(let i=0; i<numLineGeometries; ++i) {
-            lineGeom = new LineGeometry();
-            lineGeom.setPositions(currentMonthConfig.attributeLinePositions[i]);
-            lineGeom.setColors(lineColours);
+        lineGeom = new LineGeometry();
+        lineGeom.setPositions(positions);
+        lineGeom.setColors(lineColours);
 
-            line = new Line2(lineGeom, lineMat);
-            line.name = "Attribute" + i + "Trend";
-            line.computeLineDistances();
-            line.scale.set(scale, scale, scale);
-            line.visible = true;
-            currentMonthConfig.trendGroups[i].add(line);
-        }
+        line = new Line2(lineGeom, lineMat);
+        line.name = "Cases";
+        line.computeLineDistances();
+        line.scale.set(scale, scale, scale);
+        line.visible = true;
+        //currentMonthConfig.trendGroups[i].add(line);
+        group.add(line);
     }
 
     update() {
