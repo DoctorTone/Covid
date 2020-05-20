@@ -63,7 +63,7 @@ class Covid extends BaseApp {
         const ground = new THREE.Mesh(groundGeom, groundMat);
         ground.rotation.x = -Math.PI/2;
         ground.position.y = 0;
-        ground.castShadow = true;
+        ground.castShadow = false;
         ground.receiveShadow = true;
         this.root.add(ground);
     }
@@ -207,6 +207,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * FIRST));
+            currentBarMesh.castShadow = true;
             barsTests.push(currentBarMesh);
             testGroup.add(currentBarMesh);
         }
@@ -245,6 +246,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_CASES;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * SECOND));
+            currentBarMesh.castShadow = true;
             barsCases.push(currentBarMesh);
             caseGroup.add(currentBarMesh);
         }
@@ -283,6 +285,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_DEATHS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * THIRD));
+            currentBarMesh.castShadow = true;
             barsDeaths.push(currentBarMesh);
             deathGroup.add(currentBarMesh);
         }

@@ -5,7 +5,7 @@ const SceneConfig = {
     ambientLightColour: 0x444444,
     pointLightColour: 0xbbbbbb,
     LightPos: {
-        x: 90,
+        x: 150,
         y: 150,
         z: 90
     },
