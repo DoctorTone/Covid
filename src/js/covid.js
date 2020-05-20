@@ -518,7 +518,7 @@ class Covid extends BaseApp {
         const startDay = startPoint/3;
         const endDay = positions.length/3;
         for (let i=startDay,numPoints=positions.length; i<(endDay-1); ++i, startPoint+=3) {
-            averages.push(positions[startPoint], currentAvg, positions[startPoint + 2]+2);
+            averages.push(positions[startPoint], currentAvg, positions[startPoint + 2] + 2);
             currentTotal -= data[currentLowerBound].position.y * 2;
             ++currentLowerBound;
             currentTotal += data[currentUpperBound].position.y * 2;
@@ -536,12 +536,16 @@ class Covid extends BaseApp {
         }
 
         let lineMat = new LineMaterial( {
-            color: 0x756d75,
+            color: 0x808080,
             linewidth: 10,
             vertexColors: THREE.VertexColors,
-            dashed: false
+            dashed: true,
+            dashScale: 0.5,
+            dashSize: 2,
+            gapSize: 1
         });
 
+        lineMat.defines.USE_DASH = "";
         lineMat.resolution.set( window.innerWidth, window.innerHeight );
 
         let lineGeom;

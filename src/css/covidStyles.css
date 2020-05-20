@@ -181,9 +181,10 @@ input:checked + .slider:before {
 .rangeSlider {
     -webkit-appearance: none;
     width: 100%;
+    overflow: hidden;
     height: 25px;
     border-radius: 15px;
-    background: rgb(136, 135, 135);
+    background-color: rgb(136, 135, 135);
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -200,11 +201,16 @@ input:checked + .slider:before {
     border-radius: 50%;
     background: rgb(74, 87, 201);
     cursor: w-resize;
+    box-shadow: -1010px 0 0 1000px #666;
+}
+.rangeSlider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 25px;
 }
 .rangeSlider::-moz-range-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: rgb(0, 0, 255);
+    background: rgb(74, 87, 201);
     cursor: pointer;
 }
