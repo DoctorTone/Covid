@@ -184,11 +184,11 @@ class Covid extends BaseApp {
         labelProperty = {};
         labelProperty.position = new THREE.Vector3();
         labelProperty.scale = labelScale;
-        labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
+        labelProperty.textColour = "rgba(255, 255, 255, 1.0)";
         labelProperty.multiLine = false;
         labelProperty.visibility = false;
-        label = this.labelManager.create("ShowLabel", "Text", labelProperty);
-        UKGroup.add(label.getSprite());
+        this.infoLabel = this.labelManager.create("InfoLabel", "Text", labelProperty);
+        UKGroup.add(this.infoLabel.getSprite());
 
         const NationalGroup = new THREE.Group();
         NationalGroup.name = "NationalGroup";
@@ -221,7 +221,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * FIRST));
-            currentBarMesh.name = "Tests" + i;
+            currentBarMesh.name = "Tests-" + i;
             currentBarMesh.castShadow = true;
             barsTests.push(currentBarMesh);
             testGroup.add(currentBarMesh);
@@ -261,7 +261,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_CASES;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * SECOND));
-            currentBarMesh.name = "Cases" + i;
+            currentBarMesh.name = "Cases-" + i;
             currentBarMesh.castShadow = true;
             currentBarMesh.receiveShadow = true;
             barsCases.push(currentBarMesh);
@@ -302,7 +302,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_DEATHS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * THIRD));
-            currentBarMesh.name = "Deaths" + i;
+            currentBarMesh.name = "Deaths-" + i;
             currentBarMesh.castShadow = true;
             barsDeaths.push(currentBarMesh);
             deathGroup.add(currentBarMesh);
@@ -590,7 +590,17 @@ class Covid extends BaseApp {
 
         if(this.hoverObjects.length) {
             let text = this.hoverObjects[0].object.name;
-            console.log(text);
+            let index = text.indexOf("-");
+            let group = text.substr(0,index);
+            let number = text.substr(index+1, text.length-1);
+            number = parseInt(number, 10);
+            if (!isNaN(number)) {
+                let barPos = this.barsCases[number].position;
+                this.infoLabel.setPosition(barPos);
+                this.infoLabel.setHeight((barPos.y * 2) + 4);
+                this.infoLabel.setText(number);
+                this.infoLabel.setVisibility(true);
+            }
         }
     }
 
