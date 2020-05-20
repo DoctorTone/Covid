@@ -125,6 +125,10 @@ body {
     border: 3px solid white;
     border-radius: 10px;
 }
+#infoLabel {
+    top: 40%;
+    left: 1%;
+}
 .switch {
     position: relative;
     width: 50px;

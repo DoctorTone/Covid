@@ -187,7 +187,7 @@ class Covid extends BaseApp {
         labelProperty.textColour = "rgba(255, 255, 255, 1.0)";
         labelProperty.multiLine = false;
         labelProperty.visibility = false;
-        this.infoLabel = this.labelManager.create("InfoLabel", "Text", labelProperty);
+        this.infoLabel = this.labelManager.create("InfoLabel", "Info", labelProperty);
         UKGroup.add(this.infoLabel.getSprite());
 
         const NationalGroup = new THREE.Group();
@@ -588,6 +588,7 @@ class Covid extends BaseApp {
 
         super.update();
 
+        /*
         if(this.hoverObjects.length) {
             let text = this.hoverObjects[0].object.name;
             let index = text.indexOf("-");
@@ -595,13 +596,17 @@ class Covid extends BaseApp {
             let number = text.substr(index+1, text.length-1);
             number = parseInt(number, 10);
             if (!isNaN(number)) {
-                let barPos = this.barsCases[number].position;
-                this.infoLabel.setPosition(barPos);
-                this.infoLabel.setHeight((barPos.y * 2) + 4);
-                this.infoLabel.setText(number);
+                this.tempVec.copy(this.barsCases[number].position);
+                this.tempVec.y *= 2;
+                this.tempVec.y += 4;
+                this.tempVec.z += 2;
+                this.infoLabel.setPosition(this.tempVec);
+                this.infoLabel.setText(this.dailyCases[number]);
                 this.infoLabel.setVisibility(true);
+               this.barsCases[number].material.emissive.setHex(0x0000ff);
             }
         }
+        */
     }
 
     resetView() {
