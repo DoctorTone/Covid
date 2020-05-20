@@ -246,6 +246,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_CASES;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * SECOND));
+            currentBarMesh.name = "Cases" + i;
             currentBarMesh.castShadow = true;
             currentBarMesh.receiveShadow = true;
             barsCases.push(currentBarMesh);
@@ -481,6 +482,9 @@ class Covid extends BaseApp {
         this.points = points;
         this.heights = heights;
 
+        // For mouse over
+        this.currentViewGroup = caseGroup;
+
         this.createRollingAverage(barsCases, caseGroup);
         this.createRollingAverage(barsDeaths, deathGroup);
     }
@@ -569,6 +573,11 @@ class Covid extends BaseApp {
         let delta = this.clock.getDelta();
 
         super.update();
+
+        if(this.hoverObjects.length) {
+            let text = this.hoverObjects[0].object.name;
+            console.log(text);
+        }
     }
 
     resetView() {

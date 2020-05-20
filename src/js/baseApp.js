@@ -229,6 +229,9 @@ export class BaseApp {
     }
 
     run() {
+        this.raycaster.setFromCamera( this.mouse, this.camera );
+        // this.currentViewGroup = this.weeklyView ? this.parentGroupWeekly : this.parentGroupDaily;
+        this.hoverObjects = this.raycaster.intersectObjects(this.currentViewGroup.children);
         this.update();
         this.renderer.render( this.scenes[this.currentScene], this.camera );
         if(this.stats) this.stats.update();
