@@ -41,6 +41,7 @@ class Covid extends BaseApp {
 
         // For mouse over
         this.currentViewGroups = [];
+        this.selectedBar = -1;
 
         //Temp variables
         this.tempVec = new THREE.Vector3();
@@ -256,7 +257,7 @@ class Covid extends BaseApp {
         UKGroup.add(caseGroup);
 
         for (let i=0; i<numBars; ++i) {
-            currentBarMesh = new THREE.Mesh(barGeom, barMaterialCases);
+            currentBarMesh = new THREE.Mesh(barGeom, new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_CASES} ));
             currentBarMesh.scale.y = this.dailyCases[i] === 0 ? 0.01 : this.dailyCases[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_CASES;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
@@ -588,7 +589,10 @@ class Covid extends BaseApp {
 
         super.update();
 
-        /*
+        if (this.selectedBar >= 0) {
+            this.barsCases[this.selectedBar].material.emissive.setHex(0x000000);
+        }
+        
         if(this.hoverObjects.length) {
             let text = this.hoverObjects[0].object.name;
             let index = text.indexOf("-");
@@ -596,17 +600,19 @@ class Covid extends BaseApp {
             let number = text.substr(index+1, text.length-1);
             number = parseInt(number, 10);
             if (!isNaN(number)) {
+                /*
                 this.tempVec.copy(this.barsCases[number].position);
                 this.tempVec.y *= 2;
                 this.tempVec.y += 4;
                 this.tempVec.z += 2;
                 this.infoLabel.setPosition(this.tempVec);
                 this.infoLabel.setText(this.dailyCases[number]);
-                this.infoLabel.setVisibility(true);
+                this.infoLabel.setVisibility(true); */
                this.barsCases[number].material.emissive.setHex(0x0000ff);
+               this.selectedBar = number;
+               $("#selectionData").html(this.dailyCases[number]);
             }
         }
-        */
     }
 
     resetView() {
