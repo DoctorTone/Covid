@@ -610,6 +610,8 @@ class Covid extends BaseApp {
                 this.infoLabel.setVisibility(true); */
                this.barsCases[number].material.emissive.setHex(0x0000ff);
                this.selectedBar = number;
+               const date = covidData[number];
+               $("#selectionDate").html(date[0]);
                $("#selectionData").html(this.dailyCases[number]);
             }
         }
