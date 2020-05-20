@@ -210,6 +210,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * FIRST));
+            currentBarMesh.name = "Tests" + i;
             currentBarMesh.castShadow = true;
             barsTests.push(currentBarMesh);
             testGroup.add(currentBarMesh);
@@ -290,6 +291,7 @@ class Covid extends BaseApp {
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_DEATHS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * THIRD));
+            currentBarMesh.name = "Deaths" + i;
             currentBarMesh.castShadow = true;
             barsDeaths.push(currentBarMesh);
             deathGroup.add(currentBarMesh);
@@ -486,7 +488,7 @@ class Covid extends BaseApp {
         this.heights = heights;
 
         this.currentViewGroups.push(testGroup, caseGroup, deathGroup);
-        
+
         this.createRollingAverage(barsCases, caseGroup);
         this.createRollingAverage(barsDeaths, deathGroup);
     }
