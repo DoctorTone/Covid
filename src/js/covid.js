@@ -178,6 +178,17 @@ class Covid extends BaseApp {
         UKGroup.name = "UKGroup";
         UKGroup.visible = true;
         this.root.add(UKGroup);
+        let label;
+
+        // Show label for info
+        labelProperty = {};
+        labelProperty.position = new THREE.Vector3();
+        labelProperty.scale = labelScale;
+        labelProperty.textColour = "rgba(0, 0, 0, 1.0)";
+        labelProperty.multiLine = false;
+        labelProperty.visibility = false;
+        label = this.labelManager.create("ShowLabel", "Text", labelProperty);
+        UKGroup.add(label.getSprite());
 
         const NationalGroup = new THREE.Group();
         NationalGroup.name = "NationalGroup";
@@ -377,7 +388,6 @@ class Covid extends BaseApp {
         }
 
         // English labels
-        let label;
         const halfWay = Math.round(this.casesEngland.length/2);
         const last = this.casesEngland.length-1;
         const numCases = this.casesEngland.length;
