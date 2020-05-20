@@ -532,7 +532,7 @@ class Covid extends BaseApp {
         }
 
         let lineMat = new LineMaterial( {
-            color: 0x000000,
+            color: 0x756d75,
             linewidth: 10,
             vertexColors: THREE.VertexColors,
             dashed: false
