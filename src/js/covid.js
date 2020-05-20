@@ -247,6 +247,7 @@ class Covid extends BaseApp {
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
                 APPCONFIG.START_POS_Z + (APPCONFIG.BAR_INC_Z * SECOND));
             currentBarMesh.castShadow = true;
+            currentBarMesh.receiveShadow = true;
             barsCases.push(currentBarMesh);
             caseGroup.add(currentBarMesh);
         }
