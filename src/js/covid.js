@@ -39,6 +39,9 @@ class Covid extends BaseApp {
         this.groupAnimatingDown = false;
         this.groupAnimatingUp = false;
 
+        // For mouse over
+        this.currentViewGroups = [];
+
         //Temp variables
         this.tempVec = new THREE.Vector3();
         this.camRotateLeftRight = new THREE.Vector3(0, 1, 0);
@@ -482,9 +485,8 @@ class Covid extends BaseApp {
         this.points = points;
         this.heights = heights;
 
-        // For mouse over
-        this.currentViewGroup = caseGroup;
-
+        this.currentViewGroups.push(testGroup, caseGroup, deathGroup);
+        
         this.createRollingAverage(barsCases, caseGroup);
         this.createRollingAverage(barsDeaths, deathGroup);
     }
