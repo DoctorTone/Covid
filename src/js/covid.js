@@ -603,17 +603,21 @@ class Covid extends BaseApp {
             number = parseInt(number, 10);
             if (!isNaN(number)) {
                 let bars;
+                let info;
                 switch (group) {
                     case "Cases":
                         bars = this.barsCases;
+                        info = this.dailyCases;
                         break;
 
                     case "Tests":
                         bars = this.barsTests;
+                        info = this.dailyTests;
                         break;
 
                     case "Deaths":
                         bars = this.barsDeaths;
+                        info = this.dailyDeaths;
                         break;
 
                     default:
@@ -627,7 +631,7 @@ class Covid extends BaseApp {
                 date = date.toDateString();
                 date = date.substr(0, date.length-5);
                 $("#selectionDate").html(date);
-                $("#selectionData").html(this.dailyCases[number]);
+                $("#selectionData").html(info[number]);
             }
         }
     }
