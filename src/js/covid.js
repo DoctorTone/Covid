@@ -384,7 +384,7 @@ class Covid extends BaseApp {
         NIrelandGroup.name = "NIrelandGroup";
         NationalGroup.add(NIrelandGroup);
 
-        const heights = [];
+        const heightsEngland = [];
         let point;
         
         // English cases
@@ -394,7 +394,7 @@ class Covid extends BaseApp {
             EnglandGroup.add(point);
             point.name = "England-" + i;
             pointsEngland.push(point);
-            heights.push(point.position.y);
+            heightsEngland.push(point.position.y);
         }
 
         // English labels
@@ -419,13 +419,14 @@ class Covid extends BaseApp {
         }
         
         // Scottish cases
+        const heightsScotland = [];
         for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0x0000ff}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
             ScotlandGroup.add(point);
             point.name = "Scotland-" + i;
             pointsScotland.push(point);
-            heights.push(point.position.y);
+            heightsScotland.push(point.position.y);
         }
 
         // Scottish labels
@@ -446,13 +447,14 @@ class Covid extends BaseApp {
         }
 
         // Wales cases
+        const heightsWales = [];
         for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0xff0000}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
             WalesGroup.add(point);
             point.name = "Wales-" + i;
             pointsWales.push(point);
-            heights.push(point.position.y);
+            heightsWales.push(point.position.y);
         }
 
         // Wales labels
@@ -473,13 +475,14 @@ class Covid extends BaseApp {
         }
 
         // NIreland cases
+        const heightsNIreland = [];
         for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
             point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0x00ff00}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
             NIrelandGroup.add(point);
             point.name = "NIreland-" + i;
             pointsNIreland.push(point);
-            heights.push(point.position.y);
+            heightsNIreland.push(point.position.y);
         }
 
         // NIreland labels
@@ -499,11 +502,14 @@ class Covid extends BaseApp {
             currentIndex = last;
         }
         
-        this.heights = heights;
         this.pointsEngland = pointsEngland;
         this.pointsScotland = pointsScotland;
         this.pointsWales = pointsWales;
         this.pointsNIreland = pointsNIreland;
+        this.heightsEngland = heightsEngland;
+        this.heightsScotland = heightsScotland;
+        this.heightsWales = heightsWales;
+        this.heightsNIreland = heightsNIreland;
 
         this.currentViewGroups.push(deathGroup, caseGroup, testGroup);
         this.casesGroups.push(EnglandGroup, ScotlandGroup, WalesGroup, NIrelandGroup);
