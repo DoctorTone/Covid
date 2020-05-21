@@ -498,7 +498,7 @@ class Covid extends BaseApp {
         this.points = points;
         this.heights = heights;
 
-        this.currentViewGroups.push(testGroup, caseGroup, deathGroup);
+        this.currentViewGroups.push(deathGroup, caseGroup, testGroup);
 
         this.createRollingAverage(barsCases, caseGroup);
         this.createRollingAverage(barsDeaths, deathGroup);

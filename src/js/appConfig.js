@@ -29,7 +29,7 @@ const APPCONFIG = {
     GROUND_MATERIAL: 0xdddddd,
     TEX_REPEAT: 10,
     BAR_INC_X: 3.5,
-    BAR_INC_Z: 10,
+    BAR_INC_Z: 20,
     BAR_COLOURS: [
         0xaa0000,
         0x0000aa,

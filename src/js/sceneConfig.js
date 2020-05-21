@@ -14,8 +14,8 @@ const SceneConfig = {
     ShadowMapSize: 512,
     CameraPos: {
         x: 0,
-        y: 125,
-        z: 200
+        y: 135,
+        z: 240
     },
     LookAtPos: {
         x: 2,
