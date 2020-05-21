@@ -41,6 +41,8 @@ class Covid extends BaseApp {
 
         // For mouse over
         this.currentViewGroups = [];
+        this.casesGroups = [];
+        this.currentView = APPCONFIG.UK;
         this.selectedBar = -1;
 
         //Temp variables
@@ -381,9 +383,10 @@ class Covid extends BaseApp {
         
         // English cases
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
-            point = new THREE.Mesh(sphereGeom, sphereMatEngland);
+            point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0xFFA500}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
             EnglandGroup.add(point);
+            point.name = "England-" + i;
             points.push(point);
             heights.push(point.position.y);
         }
@@ -413,9 +416,10 @@ class Covid extends BaseApp {
         
         // Scottish cases
         for (let i=0, numPoints=this.casesScotland.length; i<numPoints; ++i) {
-            point = new THREE.Mesh(sphereGeom, sphereMatScotland);
+            point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0x0000ff}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
             ScotlandGroup.add(point);
+            point.name = "Scotland-" + i;
             points.push(point);
             heights.push(point.position.y);
         }
@@ -441,9 +445,10 @@ class Covid extends BaseApp {
 
         // Wales cases
         for (let i=0, numPoints=this.casesWales.length; i<numPoints; ++i) {
-            point = new THREE.Mesh(sphereGeom, sphereMatWales);
+            point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0xff0000}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
             WalesGroup.add(point);
+            point.name = "Wales" + i;
             points.push(point);
             heights.push(point.position.y);
         }
@@ -469,9 +474,10 @@ class Covid extends BaseApp {
 
         // NIreland cases
         for (let i=0, numPoints=this.casesNIreland.length; i<numPoints; ++i) {
-            point = new THREE.Mesh(sphereGeom, sphereMatNIreland);
+            point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0x00ff00}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
             NIrelandGroup.add(point);
+            point.name = "NIreland" + i;
             points.push(point);
             heights.push(point.position.y);
         }
@@ -499,6 +505,7 @@ class Covid extends BaseApp {
         this.heights = heights;
 
         this.currentViewGroups.push(deathGroup, caseGroup, testGroup);
+        this.casesGroups.push(EnglandGroup, ScotlandGroup, WalesGroup, NIrelandGroup);
 
         this.createRollingAverage(barsCases, caseGroup);
         this.createRollingAverage(barsDeaths, deathGroup);
@@ -597,41 +604,45 @@ class Covid extends BaseApp {
         
         if(this.hoverObjects.length) {
             let text = this.hoverObjects[0].object.name;
-            let index = text.indexOf("-");
-            let group = text.substr(0,index);
-            let number = text.substr(index+1, text.length-1);
-            number = parseInt(number, 10);
-            if (!isNaN(number)) {
-                let bars;
-                let info;
-                switch (group) {
-                    case "Cases":
-                        bars = this.barsCases;
-                        info = this.dailyCases;
-                        break;
+            if (this.currentView === APPCONFIG.UK) {
+                let index = text.indexOf("-");
+                let group = text.substr(0,index);
+                let number = text.substr(index+1, text.length-1);
+                number = parseInt(number, 10);
+                if (!isNaN(number)) {
+                    let bars;
+                    let info;
+                    switch (group) {
+                        case "Cases":
+                            bars = this.barsCases;
+                            info = this.dailyCases;
+                            break;
 
-                    case "Tests":
-                        bars = this.barsTests;
-                        info = this.dailyTests;
-                        break;
+                        case "Tests":
+                            bars = this.barsTests;
+                            info = this.dailyTests;
+                            break;
 
-                    case "Deaths":
-                        bars = this.barsDeaths;
-                        info = this.dailyDeaths;
-                        break;
+                        case "Deaths":
+                            bars = this.barsDeaths;
+                            info = this.dailyDeaths;
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+
+                    bars[number].material.emissive.setHex(0x808080);
+                    this.selectedBar = number;
+                    let date = covidData[number];
+                    date = new Date(date[0]);
+                    date = date.toDateString();
+                    date = date.substr(0, date.length-5);
+                    $("#selectionDate").html(date);
+                    $("#selectionData").html(info[number]);
                 }
-
-                bars[number].material.emissive.setHex(0x808080);
-                this.selectedBar = number;
-                let date = covidData[number];
-                date = new Date(date[0]);
-                date = date.toDateString();
-                date = date.substr(0, date.length-5);
-                $("#selectionDate").html(date);
-                $("#selectionData").html(info[number]);
+            } else {
+                $("#selectionDate").html(text);
             }
         }
     }
@@ -690,6 +701,7 @@ class Covid extends BaseApp {
         const Nation = this.getObjectByName("NationalGroup");
         UK.visible = !UK.visible;
         Nation.visible = !Nation.visible;
+        this.currentView = APPCONFIG.NATIONS;
 
         // Toggle UI elements
         const key = $("#key");

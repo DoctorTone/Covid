@@ -2,6 +2,7 @@
 
 import { SceneConfig } from "./sceneConfig";
 import * as THREE from "three";
+import { APPCONFIG } from "./appConfig";
 //import * as TrackballControls from "three-trackballcontrols";
 let TrackballControls = require("three-trackballcontrols");
 
@@ -230,8 +231,11 @@ export class BaseApp {
 
     run() {
         this.raycaster.setFromCamera( this.mouse, this.camera );
-        for (let i=0,numGroups=this.currentViewGroups.length; i<numGroups; ++i) {
-            this.hoverObjects = this.raycaster.intersectObjects(this.currentViewGroups[i].children);
+        let groups = this.currentView === APPCONFIG.UK ? this.currentViewGroups : this.casesGroups;
+        // DEBUG
+        console.log("View = ", groups);
+        for (let i=0,numGroups=groups.length; i<numGroups; ++i) {
+            this.hoverObjects = this.raycaster.intersectObjects(groups[i].children);
             if (this.hoverObjects.length) break;
         }
         
