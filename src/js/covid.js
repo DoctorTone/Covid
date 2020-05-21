@@ -817,8 +817,8 @@ class Covid extends BaseApp {
         document.getElementById("sideMenuIcon").style.display = "none";
     }
 
-    closeSideMenu() {
-        document.getElementById("sideMenu").style.width = "0px";
+    closeSideMenuLeft() {
+        document.getElementById("sideMenuLeft").style.width = "0px";
         document.getElementById("WebGL-Output").style.marginLeft = "0px";
         document.getElementById("sideMenuIcon").style.display = "block";
     }
@@ -858,6 +858,7 @@ $(document).ready( () => {
     const toggleNIreland = $("#toggleNIreland");
     const scaleAll = $("#scaleAll");
     let sideMenuIconLeft = $("#sideMenuIconLeft");
+    let closeButtonLeft = $("#closeButtonLeft");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -912,6 +913,10 @@ $(document).ready( () => {
 
     sideMenuIconLeft.on("click", () => {
         app.openSideMenuLeft();
+    });
+
+    closeButtonLeft.on("click", () => {
+        app.closeSideMenuLeft();
     });
 
     toggleFade.on("click", () => {
