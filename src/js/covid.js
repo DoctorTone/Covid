@@ -702,8 +702,8 @@ class Covid extends BaseApp {
     }
 
     scaleCases(scale) {
-        const pointGroups = [this.pointsEngland];
-        const heightGroups = [this.heightsEngland];
+        const pointGroups = [this.pointsEngland, this.pointsScotland, this.pointsWales, this.pointsNIreland];
+        const heightGroups = [this.heightsEngland, this.heightsScotland, this.heightsWales, this.heightsNIreland];
         const numPoints = this.pointsEngland.length;
 
         let height;
