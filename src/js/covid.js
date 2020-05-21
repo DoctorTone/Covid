@@ -217,7 +217,7 @@ class Covid extends BaseApp {
         UKGroup.add(testGroup);
 
         for (let i=0; i<numBars; ++i) {
-            currentBarMesh = new THREE.Mesh(barGeom, barMaterialTests);
+            currentBarMesh = new THREE.Mesh(barGeom, new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_TESTS} ));
             currentBarMesh.scale.y = this.dailyTests[i] === 0 ? 0.01 : this.dailyTests[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_TESTS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
@@ -298,7 +298,7 @@ class Covid extends BaseApp {
         UKGroup.add(deathGroup);
 
         for (let i=0; i<numBars; ++i) {
-            currentBarMesh = new THREE.Mesh(barGeom, barMaterialDeaths);
+            currentBarMesh = new THREE.Mesh(barGeom, new THREE.MeshLambertMaterial( { color: APPCONFIG.BAR_COLOUR_DEATHS} ));
             currentBarMesh.scale.y = this.dailyDeaths[i] === 0 ? 0.01 : this.dailyDeaths[i];
             currentBarMesh.scale.y /= APPCONFIG.BAR_SCALE_DEATHS;
             currentBarMesh.position.set(APPCONFIG.START_POS_X + (APPCONFIG.BAR_INC_X * i), currentBarMesh.scale.y * (APPCONFIG.BAR_HEIGHT/2),
@@ -591,6 +591,8 @@ class Covid extends BaseApp {
 
         if (this.selectedBar >= 0) {
             this.barsCases[this.selectedBar].material.emissive.setHex(0x000000);
+            this.barsTests[this.selectedBar].material.emissive.setHex(0x000000);
+            this.barsDeaths[this.selectedBar].material.emissive.setHex(0x000000);
         }
         
         if(this.hoverObjects.length) {
@@ -600,22 +602,32 @@ class Covid extends BaseApp {
             let number = text.substr(index+1, text.length-1);
             number = parseInt(number, 10);
             if (!isNaN(number)) {
-                /*
-                this.tempVec.copy(this.barsCases[number].position);
-                this.tempVec.y *= 2;
-                this.tempVec.y += 4;
-                this.tempVec.z += 2;
-                this.infoLabel.setPosition(this.tempVec);
-                this.infoLabel.setText(this.dailyCases[number]);
-                this.infoLabel.setVisibility(true); */
-               this.barsCases[number].material.emissive.setHex(0x808080);
-               this.selectedBar = number;
-               let date = covidData[number];
-               date = new Date(date[0]);
-               date = date.toDateString();
-               date = date.substr(0, date.length-5);
-               $("#selectionDate").html(date);
-               $("#selectionData").html(this.dailyCases[number]);
+                let bars;
+                switch (group) {
+                    case "Cases":
+                        bars = this.barsCases;
+                        break;
+
+                    case "Tests":
+                        bars = this.barsTests;
+                        break;
+
+                    case "Deaths":
+                        bars = this.barsDeaths;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                bars[number].material.emissive.setHex(0x808080);
+                this.selectedBar = number;
+                let date = covidData[number];
+                date = new Date(date[0]);
+                date = date.toDateString();
+                date = date.substr(0, date.length-5);
+                $("#selectionDate").html(date);
+                $("#selectionData").html(this.dailyCases[number]);
             }
         }
     }
