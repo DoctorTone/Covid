@@ -127,7 +127,10 @@ body {
 }
 #infoLabel {
     top: 40%;
-    left: 1%;
+    left: 2%;
+    width: 9%;
+    border: 3px solid white;
+    border-radius: 10px;
 }
 .switch {
     position: relative;
