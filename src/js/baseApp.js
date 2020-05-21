@@ -44,7 +44,7 @@ export class BaseApp {
         this.renderer = new THREE.WebGLRenderer( {antialias : true, alpha: true});
         this.renderer.setPixelRatio( window.devicePixelRatio );
         // this.renderer.setClearColor(SceneConfig.clearColour, 1.0);
-        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.enabled = false;
         this.renderer.shadowMap.type = THREE.VSMShadowMap;
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);

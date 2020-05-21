@@ -811,8 +811,8 @@ class Covid extends BaseApp {
         }
     }
 
-    openSideMenu() {
-        document.getElementById("sideMenu").style.width = "250px";
+    openSideMenuLeft() {
+        document.getElementById("sideMenuLeft").style.width = "250px";
         document.getElementById("WebGL-Output").style.marginLeft = "250px";
         document.getElementById("sideMenuIcon").style.display = "none";
     }
@@ -857,6 +857,7 @@ $(document).ready( () => {
     const toggleWales = $("#toggleWales");
     const toggleNIreland = $("#toggleNIreland");
     const scaleAll = $("#scaleAll");
+    let sideMenuIconLeft = $("#sideMenuIconLeft");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -907,6 +908,10 @@ $(document).ready( () => {
     scaleAll.on("input", () => {
         currentScale = scaleAll.val();
         app.scaleCases(currentScale);
+    });
+
+    sideMenuIconLeft.on("click", () => {
+        app.openSideMenuLeft();
     });
 
     toggleFade.on("click", () => {
