@@ -231,7 +231,7 @@ export class BaseApp {
 
     run() {
         this.raycaster.setFromCamera( this.mouse, this.camera );
-        let groups = this.currentView === APPCONFIG.UK ? this.currentViewGroups : this.casesGroups;
+        let groups = this.currentViewUK ? this.currentViewGroups : this.casesGroups;
         for (let i=0,numGroups=groups.length; i<numGroups; ++i) {
             this.hoverObjects = this.raycaster.intersectObjects(groups[i].children);
             if (this.hoverObjects.length) break;

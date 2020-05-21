@@ -42,7 +42,7 @@ class Covid extends BaseApp {
         // For mouse over
         this.currentViewGroups = [];
         this.casesGroups = [];
-        this.currentView = APPCONFIG.UK;
+        this.currentViewUK = true;
         this.selectedBar = -1;
         this.selectedSphere = -1;
 
@@ -624,7 +624,7 @@ class Covid extends BaseApp {
             let number = text.substr(index+1, text.length-1);
             number = parseInt(number, 10);
             if (!isNaN(number)) {
-                if (this.currentView === APPCONFIG.UK) {
+                if (this.currentViewUK) {
                     let bars;
                     switch (group) {
                         case "Cases":
@@ -748,7 +748,7 @@ class Covid extends BaseApp {
         const Nation = this.getObjectByName("NationalGroup");
         UK.visible = !UK.visible;
         Nation.visible = !Nation.visible;
-        this.currentView = APPCONFIG.NATIONS;
+        this.currentViewUK = !this.currentViewUK;
 
         // Toggle UI elements
         const key = $("#key");
