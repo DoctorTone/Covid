@@ -44,6 +44,7 @@ class Covid extends BaseApp {
         this.casesGroups = [];
         this.currentView = APPCONFIG.UK;
         this.selectedBar = -1;
+        this.selectedSphere = -1;
 
         //Temp variables
         this.tempVec = new THREE.Vector3();
@@ -359,8 +360,13 @@ class Covid extends BaseApp {
         const sphereMatScotland = new THREE.MeshLambertMaterial( { color: 0x0000ff});
         const sphereMatWales = new THREE.MeshLambertMaterial( { color: 0xff0000});
         const sphereMatNIreland = new THREE.MeshLambertMaterial( { color: 0x00ff00});
-        let point;
         
+        // Create spheres
+        const pointsEngland = [];
+        const pointsScotland = [];
+        const pointsWales = [];
+        const pointsNIreland = [];
+
         // Group for each nation
         const EnglandGroup = new THREE.Group();
         EnglandGroup.name = "EnglandGroup";
@@ -379,7 +385,7 @@ class Covid extends BaseApp {
         NationalGroup.add(NIrelandGroup);
 
         const heights = [];
-        const points = [];
+        let point;
         
         // English cases
         for (let i=0, numPoints=this.casesEngland.length; i<numPoints; ++i) {
@@ -387,7 +393,7 @@ class Covid extends BaseApp {
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesEngland[i]/APPCONFIG.POINT_SCALE, 0);
             EnglandGroup.add(point);
             point.name = "England-" + i;
-            points.push(point);
+            pointsEngland.push(point);
             heights.push(point.position.y);
         }
 
@@ -398,20 +404,18 @@ class Covid extends BaseApp {
 
         let caseLabelIndices = [halfWay, last];
         currentIndex = halfWay;
-        let pointsIndex = halfWay;
         for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
-            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.copy(pointsEngland[currentIndex].position);
             labelProperty.position.y += 4;
             labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            label = this.labelManager.create("Cases" + pointsIndex, this.casesEngland[currentIndex], labelProperty);
+            label = this.labelManager.create("CasesEngland" + currentIndex, this.casesEngland[currentIndex], labelProperty);
             EnglandGroup.add(label.getSprite());
             currentIndex = last;
-            pointsIndex = last;
         }
         
         // Scottish cases
@@ -420,27 +424,25 @@ class Covid extends BaseApp {
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesScotland[i]/APPCONFIG.POINT_SCALE, 0);
             ScotlandGroup.add(point);
             point.name = "Scotland-" + i;
-            points.push(point);
+            pointsScotland.push(point);
             heights.push(point.position.y);
         }
 
         // Scottish labels
         currentIndex = halfWay;
-        pointsIndex = halfWay + numCases;
         for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
             currentIndex = caseLabelIndices[i];
-            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.copy(pointsScotland[currentIndex].position);
             labelProperty.position.y += 4;
             labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            label = this.labelManager.create("Cases" + pointsIndex, this.casesScotland[currentIndex], labelProperty);
+            label = this.labelManager.create("CasesScotland" + currentIndex, this.casesScotland[currentIndex], labelProperty);
             ScotlandGroup.add(label.getSprite());
             currentIndex = last;
-            pointsIndex = last + numCases;
         }
 
         // Wales cases
@@ -448,28 +450,26 @@ class Covid extends BaseApp {
             point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0xff0000}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesWales[i]/APPCONFIG.POINT_SCALE, 0);
             WalesGroup.add(point);
-            point.name = "Wales" + i;
-            points.push(point);
+            point.name = "Wales-" + i;
+            pointsWales.push(point);
             heights.push(point.position.y);
         }
 
         // Wales labels
         currentIndex = halfWay;
-        pointsIndex = halfWay + (numCases * 2);
         for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
             currentIndex = caseLabelIndices[i];
-            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.copy(pointsWales[currentIndex].position);
             labelProperty.position.y += 4;
             labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            label = this.labelManager.create("Cases" + pointsIndex, this.casesWales[currentIndex], labelProperty);
+            label = this.labelManager.create("CasesWales" + currentIndex, this.casesWales[currentIndex], labelProperty);
             WalesGroup.add(label.getSprite());
             currentIndex = last;
-            pointsIndex = last + (numCases * 2);
         }
 
         // NIreland cases
@@ -477,32 +477,33 @@ class Covid extends BaseApp {
             point = new THREE.Mesh(sphereGeom, new THREE.MeshLambertMaterial( { color: 0x00ff00}) );
             point.position.set(APPCONFIG.POINT_START_X + (i*APPCONFIG.POINT_SPACING), this.casesNIreland[i]/APPCONFIG.POINT_SCALE, 0);
             NIrelandGroup.add(point);
-            point.name = "NIreland" + i;
-            points.push(point);
+            point.name = "NIreland-" + i;
+            pointsNIreland.push(point);
             heights.push(point.position.y);
         }
 
         // NIreland labels
         currentIndex = halfWay;
-        pointsIndex = halfWay + (numCases * 3);
         for (let i=0, numPoints=caseLabelIndices.length; i<numPoints; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
             currentIndex = caseLabelIndices[i];;
-            labelProperty.position.copy(points[pointsIndex].position);
+            labelProperty.position.copy(pointsNIreland[currentIndex].position);
             labelProperty.position.y += 4;
             labelProperty.scale = labelScale;
             labelProperty.textColour = "rgba(55, 55, 55, 1.0)";
             labelProperty.multiLine = false;
             labelProperty.visibility = true;
-            label = this.labelManager.create("Cases" + pointsIndex, this.casesNIreland[currentIndex], labelProperty);
+            label = this.labelManager.create("CasesNIreland" + currentIndex, this.casesNIreland[currentIndex], labelProperty);
             NIrelandGroup.add(label.getSprite());
             currentIndex = last;
-            pointsIndex = last + (numCases * 3);
         }
         
-        this.points = points;
         this.heights = heights;
+        this.pointsEngland = pointsEngland;
+        this.pointsScotland = pointsScotland;
+        this.pointsWales = pointsWales;
+        this.pointsNIreland = pointsNIreland;
 
         this.currentViewGroups.push(deathGroup, caseGroup, testGroup);
         this.casesGroups.push(EnglandGroup, ScotlandGroup, WalesGroup, NIrelandGroup);
@@ -602,16 +603,23 @@ class Covid extends BaseApp {
             this.barsDeaths[this.selectedBar].material.emissive.setHex(0x000000);
         }
         
+        if (this.selectedSphere >= 0) {
+            this.pointsEngland[this.selectedSphere].material.emissive.setHex(0x000000);
+            this.pointsScotland[this.selectedSphere].material.emissive.setHex(0x000000);
+            this.pointsWales[this.selectedSphere].material.emissive.setHex(0x000000);
+            this.pointsNIreland[this.selectedSphere].material.emissive.setHex(0x000000);
+        }
+
         if(this.hoverObjects.length) {
             let text = this.hoverObjects[0].object.name;
-            if (this.currentView === APPCONFIG.UK) {
-                let index = text.indexOf("-");
-                let group = text.substr(0,index);
-                let number = text.substr(index+1, text.length-1);
-                number = parseInt(number, 10);
-                if (!isNaN(number)) {
+            let index = text.indexOf("-");
+            let group = text.substr(0,index);
+            let number = text.substr(index+1, text.length-1);
+            number = parseInt(number, 10);
+            if (!isNaN(number)) {
+                let info;
+                if (this.currentView === APPCONFIG.UK) {
                     let bars;
-                    let info;
                     switch (group) {
                         case "Cases":
                             bars = this.barsCases;
@@ -640,9 +648,31 @@ class Covid extends BaseApp {
                     date = date.substr(0, date.length-5);
                     $("#selectionDate").html(date);
                     $("#selectionData").html(info[number]);
+                } else {
+                    let spheres;
+                    switch (group) {
+                        case "England":
+                            spheres = this.pointsEngland;
+                            break;
+
+                        case "Scotland":
+                            spheres = this.pointsScotland;
+                            break;
+
+                        case "Wales":
+                            spheres = this.pointsWales;
+                            break;
+
+                        case "NIreland":
+                            spheres = this.pointsNIreland;
+                            break;
+
+                        default:
+                            break;
+                    }
+                    spheres[number].material.emissive.setHex(0x808080);
+                    this.selectedSphere = number;
                 }
-            } else {
-                $("#selectionDate").html(text);
             }
         }
     }
@@ -665,33 +695,39 @@ class Covid extends BaseApp {
         }
     }
 
-    scaleCases(groupName, scale) {
-        const testGroup = this.getObjectByName(groupName);
-        if (testGroup) {
-            let height;
-            for (let i=0, numPoints=this.points.length; i<numPoints; ++i) {
-                height = this.heights[i];
-                this.points[i].position.y = height * scale;
+    scaleCases(scale) {
+        const pointGroups = [this.pointsEngland];
+        const heightGroups = [this.heightsEngland];
+        const numPoints = this.pointsEngland.length;
+
+        let height;
+        let point;
+        let currentHeightGroup;
+        let currentPointGroup;
+        const halfWay = Math.round(this.casesEngland.length/2);
+        const last = this.casesEngland.length - 1;
+        const numCases = this.casesEngland.length;
+        const labelNames = ["CasesEngland", "CasesScotland", "CasesWales", "CasesNIreland"];
+        let currentLabelName;
+        let currentLabel;
+        let currentIndex;
+
+        for (let i=0, numGroups=pointGroups.length; i<numGroups; ++i) {
+            for (let j=0; j<numPoints; ++j) {
+                currentHeightGroup = heightGroups[i];
+                currentPointGroup = pointGroups[i];
+                height = currentHeightGroup[j];
+                currentPointGroup[j].position.y = height * scale;
             }
             // Labels
-            const halfWay = Math.round(this.casesEngland.length/2);
-            const last = this.casesEngland.length - 1;
-            const numCases = this.casesEngland.length;
-            const labelName = "Cases";
-            let currentLabelName;
-            let currentLabel;
-            let currentIndex;
-
-            for (let i=0; i<APPCONFIG.NUM_COUNTRIES; ++i) {
-                currentIndex = halfWay + (i*numCases);
-                for (let j=0; j<APPCONFIG.LABELS_PER_COUNTRY; ++j) {
-                    currentLabelName = `${labelName}${currentIndex}`;
-                    currentLabel = this.labelManager.getLabel(currentLabelName);
-                    if (currentLabel) {
-                        currentLabel.setHeight(this.points[currentIndex].position.y + 4);
-                    }
-                    currentIndex = last + (i*numCases);
+            currentIndex = halfWay;
+            for (let j=0; j<APPCONFIG.LABELS_PER_COUNTRY; ++j) {
+                currentLabelName = `${labelNames[i]}${currentIndex}`;
+                currentLabel = this.labelManager.getLabel(currentLabelName);
+                if (currentLabel) {
+                    currentLabel.setHeight(currentPointGroup[currentIndex].position.y + 4);
                 }
+                currentIndex = last;
             }
         }
     }
@@ -859,7 +895,7 @@ $(document).ready( () => {
 
     scaleAll.on("input", () => {
         currentScale = scaleAll.val();
-        app.scaleCases("NationalGroup", currentScale);
+        app.scaleCases(currentScale);
     });
 
     toggleFade.on("click", () => {
