@@ -682,8 +682,8 @@ class Covid extends BaseApp {
                 date = new Date(date[0]);
                 date = date.toDateString();
                 date = date.substr(0, date.length-5);
-                $("#selectionDate").html(date);
-                $("#selectionData").html(info[number]);
+                $(".selectionDate").html(date);
+                $(".selectionData").html(info[number]);
             }
         }
     }

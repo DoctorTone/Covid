@@ -50,19 +50,38 @@
   </div>
 
   <!-- Off canvas menu -->
-  <div id="sideMenuLeft" class="sideNav text-secondary">
+  <div id="sideMenuLeft" class="sideNav">
     <a href="#" id="closeButtonLeft" class="closebtn">&times;</a>
-    <div class="pl-5 py-3 mb-5">
-      <h4 class="mb-5">Sleep Data</h4>
-      <p>Sleep: <span id="sleepSide">7h 3mins</span></p>
-      <p>Quality: <span id="qualitySide">7h 3 mins</span></p>
-      <p>Awake: <span id="awakeSide">7h 3mins</span></p>
-      <p>Deep: <span id="deepSide">7h 3 mins</span></p>
+    <div class="px-3 py-2 text-left">
+      <p>
+        Key
+      </p>
+      <div>
+        <span class="bg-primary">
+          &nbsp&nbsp&nbsp
+        </span>
+        <span class="pl-2">Tests</span>
+      </div>
+      <div>
+        <span class="bg-success">
+          &nbsp&nbsp&nbsp
+        </span>
+        <span class="pl-2">Cases</span>
+      </div>
+      <div>
+        <span class="bg-danger">
+          &nbsp&nbsp&nbsp
+        </span>
+        <span class="pl-2">Deaths</span>
+      </div>
     </div>
-    <div id="monthPanel" class="mt-5 ml-3 pl-3">
-      <button id="monthLeftSide" class="btn btn-secondary"><</button>
-      <span class="infoTitleBtn">Month</span>
-      <button id="monthRightSide" class="btn btn-secondary">></button>
+    <div class="text-left px-2 py-2">
+      <p>Selection</p>
+      <p class="selectionDate pl-2">None</p>
+      <p class="selectionData pl-2"></p>
+    </div>
+    <div>
+      <button type="button" id="toggleFade" class="btn btn-primary">UK <i class="fas fa-arrows-alt-h"></i> Nations</button>
     </div>
   </div>
 
@@ -115,7 +134,7 @@
       <h3 class="text-white">Covid-19 Data</h3>
       <h5 class="text-white">May 11th 2020</h5>
     </div>
-    <div id="key" class="overlay px-3 py-2 text-left d-none">
+    <div id="key" class="overlay px-3 py-2 text-left d-none d-lg-block">
       <p>
         Key
       </p>
@@ -167,10 +186,10 @@
         <span class="pl-2">N.Ireland</span>
       </div>
     </div>
-    <div id="infoLabel" class="overlay text-left px-2 py-2 d-none">
+    <div id="infoLabel" class="overlay text-left px-2 py-2 d-none d-lg-block">
       <p>Selection</p>
-      <p id="selectionDate" class="pl-2"></p>
-      <p id="selectionData" class="pl-2"></p>
+      <p class="selectionDate pl-2">None</p>
+      <p class="selectionData pl-2"></p>
     </div>
     <div id="visibility" class="overlay text-white d-none d-lg-block">
       <h4 class="text-secondary">Visibility</h4>
