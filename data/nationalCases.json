@@ -826,14 +826,5 @@
   ["2020-05-11","UK","Tests",1400107],
   ["2020-05-11","Wales","ConfirmedCases",11706],
   ["2020-05-11","Wales","Deaths",1148],
-  ["2020-05-11","Wales","Tests",44288],
-  ["2020-05-12","England","ConfirmedCases",139086],
-  ["2020-05-12","England","Deaths",29260],
-  ["2020-05-12","Northern Ireland","ConfirmedCases",4253],
-  ["2020-05-12","Northern Ireland","Deaths",449],
-  ["2020-05-12","Northern Ireland","Tests",35201],
-  ["2020-05-12","Scotland","ConfirmedCases",13763],
-  ["2020-05-12","Wales","ConfirmedCases",11706],
-  ["2020-05-12","Wales","Deaths",1154],
-  ["2020-05-12","Wales","Tests",44291]
+  ["2020-05-11","Wales","Tests",44288]
 ]

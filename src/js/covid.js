@@ -620,10 +620,10 @@ class Covid extends BaseApp {
             let text = this.hoverObjects[0].object.name;
             let index = text.indexOf("-");
             let group = text.substr(0,index);
+            let info;
             let number = text.substr(index+1, text.length-1);
             number = parseInt(number, 10);
             if (!isNaN(number)) {
-                let info;
                 if (this.currentView === APPCONFIG.UK) {
                     let bars;
                     switch (group) {
@@ -648,29 +648,27 @@ class Covid extends BaseApp {
 
                     bars[number].material.emissive.setHex(0x808080);
                     this.selectedBar = number;
-                    let date = covidData[number];
-                    date = new Date(date[0]);
-                    date = date.toDateString();
-                    date = date.substr(0, date.length-5);
-                    $("#selectionDate").html(date);
-                    $("#selectionData").html(info[number]);
                 } else {
                     let spheres;
                     switch (group) {
                         case "England":
                             spheres = this.pointsEngland;
+                            info = this.casesEngland;
                             break;
 
                         case "Scotland":
                             spheres = this.pointsScotland;
+                            info = this.casesScotland;
                             break;
 
                         case "Wales":
                             spheres = this.pointsWales;
+                            info = this.casesWales;
                             break;
 
                         case "NIreland":
                             spheres = this.pointsNIreland;
+                            info = this.casesNIreland;
                             break;
 
                         default:
@@ -679,6 +677,13 @@ class Covid extends BaseApp {
                     spheres[number].material.emissive.setHex(0x808080);
                     this.selectedSphere = number;
                 }
+                // Update info
+                let date = covidData[number];
+                date = new Date(date[0]);
+                date = date.toDateString();
+                date = date.substr(0, date.length-5);
+                $("#selectionDate").html(date);
+                $("#selectionData").html(info[number]);
             }
         }
     }
