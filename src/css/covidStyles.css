@@ -78,6 +78,10 @@ body {
     top: 15%;
     left: 2.5%;
 }
+#sideMenuIconRight {
+    top: 15%;
+    right: 2.5%;
+}
 .sideNav {
     height: 100%;
     width: 0;
