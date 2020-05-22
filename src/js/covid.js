@@ -812,8 +812,8 @@ class Covid extends BaseApp {
     }
 
     openSideMenuLeft() {
-        document.getElementById("sideMenuLeft").style.width = "250px";
-        document.getElementById("WebGL-Output").style.marginLeft = "250px";
+        document.getElementById("sideMenuLeft").style.width = APPCONFIG.SIDE_MENU_WIDTH;
+        document.getElementById("WebGL-Output").style.marginLeft = APPCONFIG.SIDE_MENU_WIDTH;
         document.getElementById("sideMenuIcon").style.display = "none";
     }
 

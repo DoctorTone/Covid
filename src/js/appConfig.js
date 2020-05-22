@@ -117,7 +117,8 @@ const APPCONFIG = {
     NUM_COUNTRIES: 4,
     LABELS_PER_COUNTRY: 2,
     UK: 0,
-    NATIONS: 1
+    NATIONS: 1,
+    SIDE_MENU_WIDTH: "150px"
 };
 
 export { APPCONFIG };
