@@ -827,6 +827,12 @@ class Covid extends BaseApp {
         }
     }
 
+    openSideMenuRight() {
+        document.getElementById("sideMenuRight").style.width = APPCONFIG.SIDE_MENU_WIDTH;
+        document.getElementById("WebGL-Output").style.marginRight = APPCONFIG.SIDE_MENU_WIDTH;
+        document.getElementById("sideMenuIconRight").style.display = "none";
+    }
+
     stopNotifications(elemList) {
         for(let i=0, numElems=elemList.length; i<numElems; ++i) {
             $('#' + elemList[i]).contextmenu(() => {
@@ -863,6 +869,7 @@ $(document).ready( () => {
     const scaleAll = $("#scaleAll");
     let sideMenuIconLeft = $("#sideMenuIconLeft");
     let closeButtonLeft = $("#closeButtonLeft");
+    let sideMenuIconRight = $("#sideMenuIconRight");
 
     toggleTests.on("click", () => {
         app.toggleVisibility("TestGroup");
@@ -921,6 +928,10 @@ $(document).ready( () => {
 
     closeButtonLeft.on("click", () => {
         app.closeSideMenuLeft();
+    });
+
+    sideMenuIconRight.on("click", () => {
+        app.openSideMenuRight();
     });
 
     toggleFade.on("click", () => {
