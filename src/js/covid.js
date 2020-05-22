@@ -751,6 +751,7 @@ class Covid extends BaseApp {
         this.currentViewUK = !this.currentViewUK;
 
         // Toggle UI elements
+        this.closeSideMenuLeft();
         const key = $("#key");
         const keyNational = $("#keyNational");
         const visibility = $("#visibility");
@@ -820,7 +821,10 @@ class Covid extends BaseApp {
     closeSideMenuLeft() {
         document.getElementById("sideMenuLeft").style.width = "0px";
         document.getElementById("WebGL-Output").style.marginLeft = "0px";
-        document.getElementById("sideMenuIcon").style.display = "block";
+        const elem = document.getElementById("sideMenuIcon");
+        if (elem) {
+            elem.style.display = "block";
+        }
     }
 
     stopNotifications(elemList) {
