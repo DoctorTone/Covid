@@ -28,7 +28,8 @@ const SceneConfig = {
     BACKGROUND: 0xcccccc,
     FOG_COLOUR: 0xa0a0a0,
     HEMISPHERE_COLOUR_START: 0x555555,
-    HEMISPHERE_COLOUR_END: 0x222222
+    HEMISPHERE_COLOUR_END: 0x222222,
+    SCREEN_SIZE_LARGE: 768
 };
 
 export { SceneConfig };

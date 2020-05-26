@@ -502,6 +502,12 @@ class Covid extends BaseApp {
             currentIndex = last;
         }
         
+        // Cast shadows on supported devices
+        this.directionalLight.castShadow = true;
+        if (window.innerWidth < SceneConfig.SCREEN_SIZE_LARGE) {
+            this.directionalLight.castShadow = false;
+        }
+        
         this.pointsEngland = pointsEngland;
         this.pointsScotland = pointsScotland;
         this.pointsWales = pointsWales;
