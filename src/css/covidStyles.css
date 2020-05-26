@@ -46,7 +46,7 @@ body {
 #info {
     bottom: 1%;
     right: 1%;
-    width: 15%;
+    width: 12.5%;
     -webkit-touch-callout: none;
 }
 #info img {
@@ -252,4 +252,10 @@ input:checked + .slider:before {
     border-radius: 50%;
     background: rgb(74, 87, 201);
     cursor: pointer;
+}
+/* Media queries */
+@media (min-width: 576px) and (orientation: landscape) {
+    #info {
+        width: 7.5%;
+    }
 }
