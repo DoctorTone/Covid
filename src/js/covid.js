@@ -860,11 +860,17 @@ $(document).ready( () => {
 
     // Elements
     const toggleTests = $("#toggleTests");
+    const toggleTestsSide = $("#toggleTestsSide");
     const toggleCases = $("#toggleCases");
+    const toggleCasesSide = $("#toggleCasesSide");
     const toggleDeaths = $("#toggleDeaths");
+    const toggleDeathsSide = $("#toggleDeathsSide");
     const scaleTests = $("#scaleTests");
+    const scaleTestsSide = $("#scaleTestsSide");
     const scaleCases = $("#scaleCases");
+    const scaleCasesSide = $("#scaleCasesSide");
     const scaleDeaths = $("#scaleDeaths");
+    const scaleDeathsSide = $("#scaleDeathsSide");
     const info = $("#info");
     const toggleFade = $(".toggleFade");
     const fadeScreen = $("#fadeScreen");
@@ -883,12 +889,27 @@ $(document).ready( () => {
         app.toggleVisibility("TestGroupLabels");
     });
 
+    toggleTestsSide.on("click", () => {
+        app.toggleVisibility("TestGroup");
+        app.toggleVisibility("TestGroupLabels");
+    });
+
     toggleCases.on("click", () => {
         app.toggleVisibility("CaseGroup");
         app.toggleVisibility("CaseGroupLabels");
     });
 
+    toggleCasesSide.on("click", () => {
+        app.toggleVisibility("CaseGroup");
+        app.toggleVisibility("CaseGroupLabels");
+    });
+
     toggleDeaths.on("click", () => {
+        app.toggleVisibility("DeathGroup");
+        app.toggleVisibility("DeathGroupLabels");
+    });
+
+    toggleDeathsSide.on("click", () => {
         app.toggleVisibility("DeathGroup");
         app.toggleVisibility("DeathGroupLabels");
     });
@@ -914,13 +935,28 @@ $(document).ready( () => {
         app.scaleGroup("TestGroup", currentScale);
     });
 
+    scaleTestsSide.on("input", () => {
+        currentScale = scaleTestsSide.val();
+        app.scaleGroup("TestGroup", currentScale);
+    });
+
     scaleCases.on("input", () => {
         currentScale = scaleCases.val();
         app.scaleGroup("CaseGroup", currentScale);
     });
 
+    scaleCasesSide.on("input", () => {
+        currentScale = scaleCasesSide.val();
+        app.scaleGroup("CaseGroup", currentScale);
+    });
+
     scaleDeaths.on("input", () => {
         currentScale = scaleDeaths.val();
+        app.scaleGroup("DeathGroup", currentScale);
+    });
+
+    scaleDeathsSide.on("input", () => {
+        currentScale = scaleDeathsSide.val();
         app.scaleGroup("DeathGroup", currentScale);
     });
 
