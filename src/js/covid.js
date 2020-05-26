@@ -507,7 +507,7 @@ class Covid extends BaseApp {
         if (window.innerWidth < SceneConfig.SCREEN_SIZE_LARGE) {
             this.directionalLight.castShadow = false;
         }
-        
+
         this.pointsEngland = pointsEngland;
         this.pointsScotland = pointsScotland;
         this.pointsWales = pointsWales;
@@ -602,6 +602,15 @@ class Covid extends BaseApp {
         line.visible = true;
         //currentMonthConfig.trendGroups[i].add(line);
         group.add(line);
+    }
+
+    windowResize(event) {
+        super.windowResize(event);
+
+        this.directionalLight.castShadow = true;
+        if (window.innerWidth < SceneConfig.SCREEN_SIZE_LARGE) {
+            this.directionalLight.castShadow = false;
+        }
     }
 
     update() {
