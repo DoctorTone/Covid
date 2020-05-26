@@ -151,7 +151,7 @@ body {
 }
 #key,
 #keyNational {
-    top: 12.5%;
+    top: 11%;
     left: 2%;
     width: 13%;
     border: 3px solid white;
@@ -257,5 +257,11 @@ input:checked + .slider:before {
 @media (min-width: 576px) and (orientation: landscape) {
     #info {
         width: 7.5%;
+    }
+}
+
+@media (min-width: 1200px) {
+    #info {
+        width: 5%;
     }
 }
