@@ -783,10 +783,13 @@ class Covid extends BaseApp {
             scalesNational.addClass("d-none");
         } else {
             key.addClass("d-none");
+            key.removeClass("d-lg-block");
             keyNational.removeClass("d-none");
             visibility.addClass("d-none");
+            visibility.removeClass("d-lg-block");
             visibilityNational.removeClass("d-none");
             scales.addClass("d-none");
+            scales.removeClass("d-lg-block");
             scalesNational.removeClass("d-none");
         }
     }
