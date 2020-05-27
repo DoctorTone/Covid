@@ -776,6 +776,8 @@ class Covid extends BaseApp {
         // Side menus
         const leftMenuUK = $("#leftMenuUK");
         const leftMenuNational = $("#leftMenuNational");
+        const rightMenuUK = $("#rightMenuUK");
+        const rightMenuNational = $("#rightMenuNational");
 
         if (UK.visible) {
             key.addClass("d-none");
@@ -790,6 +792,8 @@ class Covid extends BaseApp {
             */
             leftMenuUK.removeClass("d-none");
             leftMenuNational.addClass("d-none");
+            rightMenuUK.removeClass("d-none");
+            rightMenuNational.addClass("d-none");
         } else {
             key.addClass("d-none");
             key.removeClass("d-lg-block");
@@ -806,6 +810,8 @@ class Covid extends BaseApp {
             // Side menus
             leftMenuUK.addClass("d-none");
             leftMenuNational.removeClass("d-none");
+            rightMenuUK.addClass("d-none");
+            rightMenuNational.removeClass("d-none");
         }
     }
 

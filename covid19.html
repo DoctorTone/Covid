@@ -120,64 +120,113 @@
   <div id="sideMenuRight" class="sideNav-right">
     <a href="#" id="closeButtonRight" class="closebtn">&times;</a>
     <div class="text-white pl-2 mt-sm-5">
-      <h4 class="text-secondary">Visibility</h4>
-      <div class="row">
-        <div class="col-6 text-left">
-          <span>Tests</span>
-        </div>
-        <div class="col-6">
-          <label class="switch">
-            <input id="toggleTestsSide" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-6 text-left">
-          <span>Cases</span>
-        </div>
-        <div class="col-6">
-          <label class="switch">
-            <input id="toggleCasesSide" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-6 text-left">
-          <span>Deaths</span>
-        </div>
-        <div class="col-6">
-          <label class="switch">
-            <input id="toggleDeathsSide" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-      <div class="text-white mt-sm-5">
-        <h4 class="text-secondary">Scale</h4>
+      <div id="rightMenuUK">
+        <h4 class="text-secondary">Visibility</h4>
         <div class="row">
-          <div class="col-4">
+          <div class="col-6 text-left">
             <span>Tests</span>
           </div>
-          <div class="col-8">
-            <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleTestsSide">
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleTestsSide" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-6 text-left">
             <span>Cases</span>
           </div>
-          <div class="col-8">
-            <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleCasesSide">
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleCasesSide" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-6 text-left">
             <span>Deaths</span>
           </div>
-          <div class="col-8">
-            <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleDeathsSide">
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleDeathsSide" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="text-white mt-sm-5">
+          <h4 class="text-secondary">Scale</h4>
+          <div class="row">
+            <div class="col-4">
+              <span>Tests</span>
+            </div>
+            <div class="col-8">
+              <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleTestsSide">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <span>Cases</span>
+            </div>
+            <div class="col-8">
+              <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleCasesSide">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <span>Deaths</span>
+            </div>
+            <div class="col-8">
+              <input type="range" min="0.05" max="2" value="1" step="0.05" class="rangeSlider" id="scaleDeathsSide">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="rightMenuNational" class="d-none">
+        <h4 class="text-secondary">Visibility</h4>
+        <div class="row">
+          <div class="col-6 text-left">
+            <span>England</span>
+          </div>
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleEngland" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-left">
+            <span>Scotland</span>
+          </div>
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleScotland" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-left">
+            <span>Wales</span>
+          </div>
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleWales" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-left">
+            <span>N.Ireland</span>
+          </div>
+          <div class="col-6">
+            <label class="switch">
+              <input id="toggleNIreland" type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
       </div>
