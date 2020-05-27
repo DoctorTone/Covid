@@ -778,13 +778,18 @@ class Covid extends BaseApp {
         const leftMenuNational = $("#leftMenuNational");
 
         if (UK.visible) {
+            /*
             key.removeClass("d-none");
             keyNational.addClass("d-none");
             visibility.removeClass("d-none");
             visibilityNational.addClass("d-none");
             scales.removeClass("d-none");
             scalesNational.addClass("d-none");
+            */
+            leftMenuUK.removeClass("d-none");
+            leftMenuNational.addClass("d-none");
         } else {
+            /*
             key.addClass("d-none");
             key.removeClass("d-lg-block");
             keyNational.addClass("d-lg-block");
@@ -794,6 +799,7 @@ class Covid extends BaseApp {
             scales.addClass("d-none");
             scales.removeClass("d-lg-block");
             scalesNational.removeClass("d-none");
+            */
             // Side menus
             leftMenuUK.addClass("d-none");
             leftMenuNational.removeClass("d-none");
