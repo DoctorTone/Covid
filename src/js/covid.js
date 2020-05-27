@@ -906,9 +906,13 @@ $(document).ready( () => {
     const toggleFade = $(".toggleFade");
     const fadeScreen = $("#fadeScreen");
     const toggleEngland = $("#toggleEngland");
+    const toggleEnglandSide = $("#toggleEnglandSide");
     const toggleScotland = $("#toggleScotland");
+    const toggleScotlandSide = $("#toggleScotlandSide");
     const toggleWales = $("#toggleWales");
+    const toggleWalesSide = $("#toggleWalesSide");
     const toggleNIreland = $("#toggleNIreland");
+    const toggleNIrelandSide = $("#toggleNIrelandSide");
     const scaleAll = $("#scaleAll");
     let sideMenuIconLeft = $("#sideMenuIconLeft");
     let closeButtonLeft = $("#closeButtonLeft");
@@ -949,7 +953,15 @@ $(document).ready( () => {
         app.toggleVisibility("EnglandGroup");
     });
 
+    toggleEnglandSide.on("click", () => {
+        app.toggleVisibility("EnglandGroup");
+    });
+
     toggleScotland.on("click", () => {
+        app.toggleVisibility("ScotlandGroup");
+    });
+
+    toggleScotlandSide.on("click", () => {
         app.toggleVisibility("ScotlandGroup");
     });
 
@@ -957,7 +969,15 @@ $(document).ready( () => {
         app.toggleVisibility("WalesGroup");
     });
 
+    toggleWalesSide.on("click", () => {
+        app.toggleVisibility("WalesGroup");
+    });
+
     toggleNIreland.on("click", () => {
+        app.toggleVisibility("NIrelandGroup");
+    });
+
+    toggleNIrelandSide.on("click", () => {
         app.toggleVisibility("NIrelandGroup");
     });
 
