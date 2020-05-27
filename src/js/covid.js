@@ -767,6 +767,7 @@ class Covid extends BaseApp {
 
         // Toggle UI elements
         this.closeSideMenuLeft();
+        this.closeSideMenuRight();
         const key = $("#key");
         const keyNational = $("#keyNational");
         const visibility = $("#visibility");
