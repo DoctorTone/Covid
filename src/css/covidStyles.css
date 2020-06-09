@@ -39,13 +39,12 @@ body {
 .copyright {
     position: absolute;
     bottom: 1%;
-    left: 1%;
     width: 100%;
     -webkit-touch-callout: none;
 }
 #info {
     bottom: 1%;
-    right: 1%;
+    left: 1%;
     width: 12.5%;
     -webkit-touch-callout: none;
 }
