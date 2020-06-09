@@ -13,13 +13,13 @@ const SceneConfig = {
     ShadowExtra: 35,
     ShadowMapSize: 512,
     CameraPos: {
-        x: 0,
-        y: 135,
-        z: 240
+        x: 20,
+        y: 180,
+        z: 300
     },
     LookAtPos: {
-        x: 2,
-        y: 80,
+        x: 20,
+        y: 110,
         z: 15
     },
     NEAR_PLANE: 0.1,
