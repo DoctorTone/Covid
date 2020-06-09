@@ -238,7 +238,7 @@ class Covid extends BaseApp {
         UKGroup.add(testLabelGroup);
 
         const labelTestScale = new THREE.Vector3(10, 6, 1);
-        const testLabelIndex = [40, 48, 55, 61, 64, 68, 71];
+        const testLabelIndex = [40, 48, 55, 61, 64, 68, 71, 76, 78, 80, 89];
         for (let i=0, numLabels=testLabelIndex.length; i<numLabels; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
