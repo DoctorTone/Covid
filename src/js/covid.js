@@ -319,7 +319,7 @@ class Covid extends BaseApp {
         UKGroup.add(deathLabelGroup);
 
         const labelDeathScale = new THREE.Vector3(9, 4.5, 1);
-        const deathLabelIndex = [15, 20, 26, 31, 34, 37, 40, 44, 48, 51, 54, 58, 65, 70];
+        const deathLabelIndex = [15, 20, 26, 31, 34, 37, 40, 44, 48, 51, 54, 58, 65, 70, 72, 76, 79, 84, 87];
         for (let i=0, numLabels=deathLabelIndex.length; i<numLabels; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
