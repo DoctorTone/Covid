@@ -279,7 +279,7 @@ class Covid extends BaseApp {
         UKGroup.add(caseLabelGroup);
 
         const labelCaseScale = new THREE.Vector3(10, 6, 1);
-        const caseLabelIndex = [7, 13, 20, 26, 31, 35, 40, 44, 49, 54, 61, 66, 70];
+        const caseLabelIndex = [7, 13, 20, 26, 31, 35, 40, 44, 49, 54, 61, 66, 70, 75, 82, 89];
         for (let i=0, numLabels=caseLabelIndex.length; i<numLabels; ++i) {
             labelProperty = {};
             labelProperty.position = new THREE.Vector3();
