@@ -20,8 +20,10 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "bootstrap": "^4.4.1",
     "controlkit": "^0.1.9",
+    "font": "0.0.4",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "three": "^0.116.1",

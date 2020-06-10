@@ -8,8 +8,9 @@ import { BaseApp } from "./baseApp";
 import { APPCONFIG } from "./appConfig";
 import { SceneConfig } from "./sceneConfig";
 import { LabelManager } from "./LabelManager";
-import controlkit from "controlkit";
 import bootstrap from "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import '@fortawesome/fontawesome-free/css/all.css'
 
 import covidData from "../../data/cases.json";
 import covidTests from "../../data/tests.json";
