@@ -252,6 +252,16 @@ input:checked + .slider:before {
     background: rgb(74, 87, 201);
     cursor: pointer;
 }
+/* Dynamic text */
+.text-h5 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.text-h5 {
+    font-size: 1.25rem;
+}
 /* Media queries */
 @media (min-width: 576px) and (orientation: landscape) {
     #info {
