@@ -148,6 +148,9 @@ body {
     right: 1%;
     width: 15%;
 }
+#scalesNational {
+    top: 30%;
+}
 #key,
 #keyNational {
     top: 10%;
