@@ -285,4 +285,10 @@ input:checked + .slider:before {
     #info {
         width: 5%;
     }
+    #toggleView {
+        top: 29%;
+    }
+    #infoLabel {
+        top: 37.5%;
+    }
 }
