@@ -105,8 +105,8 @@ body {
 .sideNav .closebtn {
     position: absolute;
     top: 0;
-    right: 25px;
-    font-size: 36px;
+    right: 15px;
+    font-size: 24px;
 }
 .sideNav-right {
     height: 100%;
@@ -133,7 +133,7 @@ body {
     position: absolute;
     top: 0;
     right: 10px;
-    font-size: 36px;
+    font-size: 24px;
     margin-left: 50px;
 }
 #visibility,
