@@ -1050,7 +1050,7 @@ $(document).ready( () => {
     });
 
     // Prevent context menu being displayed
-    let elemList = ["toggleView", "scales"];
+    let elemList = ["toggleView", "scales", "scalesNational"];
     app.stopNotifications(elemList);
 
     app.run();

@@ -47,6 +47,7 @@ body {
     bottom: 1%;
     left: 1%;
     width: 12.5%;
+    cursor: pointer;
 }
 #info img {
     width: 100%;
