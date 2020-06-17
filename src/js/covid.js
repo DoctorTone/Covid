@@ -1049,5 +1049,9 @@ $(document).ready( () => {
         $('#infoModal').modal();
     });
 
+    // Prevent context menu being displayed
+    let elemList = ["toggleView", "scales"];
+    app.stopNotifications(elemList);
+
     app.run();
 });
