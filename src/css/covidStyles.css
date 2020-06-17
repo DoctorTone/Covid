@@ -4,6 +4,8 @@ body {
     overflow: hidden;
     color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 #WebGL-Output {
     transition: margin-left .5s;
@@ -40,13 +42,11 @@ body {
     position: absolute;
     bottom: 1%;
     width: 100%;
-    -webkit-touch-callout: none;
 }
 #info {
     bottom: 1%;
     left: 1%;
     width: 12.5%;
-    -webkit-touch-callout: none;
 }
 #info img {
     width: 100%;
